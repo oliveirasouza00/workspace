@@ -1,0 +1,4 @@
+INDEX VERSION 1.131+D:\bkp Oliveira Souza\Unidade D\workspace\.metadata\.plugins\org.eclipse.jdt.core
+2354671363.index
+735705145.index
+2082454522.index

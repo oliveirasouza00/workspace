@@ -1,0 +1,118 @@
+<div id="content" class="content">
+	<div id="msgdiv" class="alert alert-danger fade in m-b-15" style="display:none">
+		<span id="msgi"></span>				
+	</div>			
+	
+	<form id="consultaform" ng-submit="" name="consultaForm">			                           
+		<div class="panel panel-inverse">
+			<div class="panel-heading">
+				<div class="panel-heading-btn">                        
+					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>                        
+				</div>
+				<h4 class="panel-title">Cadastro Consultas</h4>														
+			</div>
+				                              
+			<div class="panel-body">				           
+				<div class="col-lg-6">
+					<div class="form-group input-group col-xs-12">
+	 					<label>Descrição da consulta:<span class="text-danger">*</span></label>
+						<input type="text" name="descConsulta" class="form-control" ng-model="consulta.ds_consulta" required>			  						
+					</div>      		                   
+
+					<label>Negócio:<span class="text-danger">*</span></label>
+					<div class="form-group input-group col-xs-12">
+						<select id="empresa" class="form-control" style="width:250px" ng-options="item.id as item.name for item in areaDeNegocioSpg" ng-model="consulta.area" ng-change="listIndicadoresfunc(selectedArea)"></select><!-- ng-change="listIndicadores(selectedArea)"-->
+						<input type="hidden"  value="{{consulta.area}}">
+					</div>									
+					<button type="button" class="btn btn-primary" ng-click="salvarConsulta()" ng-disabled> Salvar </button>			                    								                  
+				</div>
+				
+				<div class="col-lg-6">
+					<div class="form-group input-group col-xs-12">
+	 					<label>Consulta:<span class="text-danger">*</span></label>
+						<textarea rows="23" class="form-control" ng-model="consulta.consulta">			  						
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>	 
+</div>
+
+<div id="content" class="content">	 
+	<div class="row"> 
+	    <div class="panel-body"> 
+                  <div class="panel panel-inverse" data-sortable-id="form-wysiwyg-1">
+                      <div class="panel-heading">                            
+                      </div>
+                      <div class="panel-body panel-form">
+                          <form class="form-horizontal" action="/" name="wysihtml5" method="POST">
+						<textarea class="ckeditor" id="editor1" name="editor1" rows="20">&lt;p&gt;This is some &lt;strong&gt;sample text&lt;/strong&gt;. You are using &lt;a href="http://ckeditor.com/"&gt;CKEditor&lt;/a&gt;.&lt;/p&gt;</textarea>
+                          </form>
+                      </div>
+                  </div> 
+              </div> 
+          </div> 
+			<div class="row"> 
+              <div class="panel-body"> 
+                  <div class="panel panel-inverse" data-sortable-id="form-wysiwyg-2">
+                      <div class="panel-heading">
+                          <div class="panel-heading-btn">
+                              <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>                                
+                          </div>
+                          <h4 class="panel-title">Editar Consultas</h4>
+                      </div>
+                      <div class="panel-body">
+                        <form action="/" name="wysihtml5" method="POST">
+														
+								<div id="exportable" class="panel-body">
+								
+								<button type="button" ng-click="listConsultasfunc()" class="btn btn-primary m-r-5 m-b-5" style="width: 55px;height: 34px;"><i class="icon ion-ios-search-strong"></i></button>
+								
+									<div class="table-responsive">
+										<table class="table table-striped table-bordered dataTable no-footer dtr-inline" st-table="listConsulta"
+											role="grid" aria-describedby="data-table_info" st-safe-src="listConsutas">
+											<thead>
+												<tr>
+													<th>Descrição da consulta</th>
+													<th>Negócio</th>
+													<th>Consulta</th>
+													<th>Config</th>													
+												</tr>
+											</thead>
+											<tbody>
+												<tr onclick="" style="cursor: pointer" role="row"
+													ng-repeat="x in listConsulta">
+													<td>{{x.ds_consulta}}</td>
+													<td>{{x.area.name}}</td>
+													<td>{{x.consulta}}</td>
+													<td>
+														<div class="btn-group m-r-5 m-b-5">
+															<a href="javascript:;" style="height: 28px;"
+																data-toggle="dropdown"
+																class="btn btn-primary dropdown-toggle"
+																aria-expanded="false"> <span class="caret"></span>
+															</a>
+															<ul class="dropdown-menu pull-right">
+																<li><a href="" ng-click="editarConsulta(x)">Editar
+																		indicador</a></li>
+															</ul>
+														</div>
+													</td>
+												</tr>
+											</tbody>
+											<tfoot>
+												<tr>
+													<td colspan="5" class="text-center">
+														<div st-pagination="" st-items-by-page="itemsByPage"></div>
+													</td>
+												</tr>
+											 </tfoot>
+										</table>
+									</div>
+								</div>
+						</form>							 
+                      </div>
+                  </div> 
+              </div> 
+          </div> 
+</div>

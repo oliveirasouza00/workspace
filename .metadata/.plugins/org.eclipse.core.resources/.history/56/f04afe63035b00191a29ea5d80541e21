@@ -1,0 +1,15 @@
+package application;
+
+import java.util.Locale;
+
+import jdk.vm.ci.meta.Local;
+
+public class Program {
+
+	public static void main(String[] args) {
+		
+		Locale.setDefault(Locale.US);
+		
+	}
+
+}

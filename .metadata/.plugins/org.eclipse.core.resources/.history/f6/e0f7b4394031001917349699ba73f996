@@ -1,0 +1,53 @@
+package br.com.marquise.centrofashion.model;
+
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+import br.com.marquise.model.BaseEntity;
+
+@Entity
+@Table(name = "APPS.Q_MQS_METODOS_RECEBIMENTO_V")
+@SequenceGenerator(name = "ENTITY_SEQUENCE", sequenceName = "MQS.JVS_ALL_CUSTOMERS_S",  allocationSize=1 )
+@AttributeOverride(name = "cod", column = @Column(name = "CF_COD"))
+public class MetodoRecebimento extends BaseEntity {
+
+	@Column(name="ORGANIZATION_ID")
+	private Long org;
+	
+	@Column(name="CF_METODO_USUARIO")
+	private String name;
+	
+	@Column(name="CF_TIPO_PAGAMENTO")
+	private String tipoPagamento;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getTipoPagamento() {
+		return tipoPagamento;
+	}
+
+	public void setTipoPagamento(String tipoPagamento) {
+		this.tipoPagamento = tipoPagamento;
+	}
+
+	public Long getOrg() {
+		return org;
+	}
+
+	public void setOrg(Long org) {
+		this.org = org;
+	}
+
+ 
+ 	
+	
+}

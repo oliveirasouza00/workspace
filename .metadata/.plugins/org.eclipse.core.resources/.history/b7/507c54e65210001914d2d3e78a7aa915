@@ -1,0 +1,21 @@
+package br.testes;
+
+public class Numero {
+
+	public static void main(String[] args) {
+		
+		int n;
+		int x;
+		int y;
+		
+		n = 2 + 10;
+		x = 3 * 5;
+		y = 10 / 2;
+		
+		System.out.println("O valor do Número é" + n + x  + y);
+		
+		
+		
+	}
+
+}

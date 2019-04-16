@@ -1,0 +1,11 @@
+package banck;
+
+public class Account {
+	
+	private int number;
+	private String holder;
+	private Double balance;
+	
+	
+
+}

@@ -1,0 +1,15 @@
+package marquise.teste;
+
+public class Teste3 {
+	
+	static int i = 3;
+	
+	public static void main(String[] args) {
+	
+		
+		
+		
+		
+	}
+
+}

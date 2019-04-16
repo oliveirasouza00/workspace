@@ -1,0 +1,110 @@
+angular.module('app').controller('ClientecscController', function($scope, $http, $ocLazyLoad, OuvidoriaCSC, tipoCsc, GenericService)
+{
+	
+   FormPlugins.init();
+   
+   $scope.clientecsc = {};
+   $scope.dateTmp = new Date();
+   $scope.tipos = tipoCsc.get();  
+   $scope.validaalert = false;
+   $scope.mensagem = "";
+   
+   $http.get("ouvidoria/areas")
+	   .then(function (response) {
+	   $scope.areasList = response.data.list;		   		   
+   });
+   
+   $scope.showImages = function(clientecsc) {
+	   $("#modal-show-imagens").modal("show");	
+	   
+   };
+   
+  /* $scope.attach = {
+		   cod: null,
+		   organizationId: $scope.usuario.organization.cod,
+		   fileName: null,
+		   typeCode: "ACOMPANHAR_PROCESSO",
+		   image: null,
+		   lastUpdatedBy: null,
+		   createdBy: null
+   };*/
+   
+   
+  
+   
+   $scope.criarAtendimento = function() {
+	   if(isValidoForm() == false) {
+		   $scope.validaalert = true;
+		   $scope.mensagem = "Preecha os campos obrigatórios *";
+		   return false;
+	   }
+	   
+	   $scope.clientecsc.date = GenericService.formataDateToJavaDate($scope.dateTmp);
+	   if($scope.clientecsc.identificacao == true) {
+		   $scope.clientecsc.identificacao = 1;
+	   } else {
+		   $scope.clientecsc.identificacao = 0;
+	   }
+	   
+	   $http({
+		   method: 'POST',
+		   url: 'ouvidoria/salvar',
+		   data : $scope.clientecsc
+		 }).then(function successCallback(response) {             
+			 
+			 $scope.protocolo = response.data.registroCSC.protocolo;
+			 $("#modal-show-atendimento").modal("show");	
+			 
+			 limpar();
+		   }, function errorCallback(response) {			   
+			   self.AppMarquise.addMensagem(response.data.erroObject);
+		});
+   }
+   
+   $scope.buscarPorProtocolo = function() {
+	   
+	   $http({
+		   method: 'POST',
+		   url: 'ouvidoria/buscarPorProtocolo',
+		   data : $scope.clientecsc
+		 }).then(function successCallback(response) {             
+			 
+			 $scope.registroAberto = response.data.registroCSC;
+			 if($scope.registroAberto.protocolo == undefined) {
+				 self.AppMarquise.addNotification("Não existe", "Este protocolo não consta na base de dados.");
+			 } else {
+				 opendialod();
+			 }
+			 
+			 
+			// limpar();
+		   }, function errorCallback(response) {			   
+			   self.AppMarquise.addMensagem(response.data.erroObject);
+		});
+   }
+   
+   opendialod = function() {
+	 $("#dialogProtocolo").modal("show");	
+   }
+   
+   
+   limpar = function() {
+	   $scope.clientecsc = {};
+	   $scope.validaalert = false;
+	   $scope.mensagem = "";
+   }
+   
+   isValidoForm = function() {
+	   if($scope.clientecsc == undefined) {
+		   return false; 
+	   } else if($scope.clientecsc.tipo == undefined) {
+		   return false;
+	   } else if($scope.clientecsc.areaCSC == undefined) {
+		   return false;
+	   } else if($scope.clientecsc.registro == undefined) {
+		   return false;
+	   }
+   }
+   
+      
+});

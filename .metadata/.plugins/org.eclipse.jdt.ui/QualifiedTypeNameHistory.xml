@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="br.com.marquise.csc.model.RegistroCSC"/>
+<fullyQualifiedTypeName name="br.com.marquise.csc.model.AreaCSC"/>
+<fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
+<fullyQualifiedTypeName name="org.exolab.castor.types.DateTime"/>
+<fullyQualifiedTypeName name="br.com.marquise.service.AttachmentService"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="br.com.marquise.model.Attachment"/>
+<fullyQualifiedTypeName name="br.com.caelum.vraptor.Post"/>
+<fullyQualifiedTypeName name="br.com.caelum.vraptor.Get"/>
+<fullyQualifiedTypeName name="br.com.caelum.vraptor.Path"/>
+<fullyQualifiedTypeName name="br.com.marquise.informacon.dao.InformaconDao"/>
+<fullyQualifiedTypeName name="javax.ejb.Stateless"/>
+<fullyQualifiedTypeName name="br.com.marquise.informacon.dao.impl.InformaconDaoImpl"/>
+<fullyQualifiedTypeName name="br.com.marquise.informacon.service.InformaconService"/>
+<fullyQualifiedTypeName name="br.com.marquise.model.AbstractEntity"/>
+<fullyQualifiedTypeName name="javax.inject.Inject"/>
+<fullyQualifiedTypeName name="java.math.BigDecimal"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="br.com.marquise.async.Filme"/>
+<fullyQualifiedTypeName name="com.google.gson.Gson"/>
+<fullyQualifiedTypeName name="javax.faces.event.PhaseListener"/>
+<fullyQualifiedTypeName name="javax.faces.event.PhaseEvent"/>
+<fullyQualifiedTypeName name="teste.br.com.marquise.PhaseListener"/>
+<fullyQualifiedTypeName name="javax.faces.event.PhaseId"/>
+<fullyQualifiedTypeName name="javax.print.DocFlavor.INPUT_STREAM"/>
+<fullyQualifiedTypeName name="java.lang.StrictMath"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="javax.transaction.xa.Xid"/>
+<fullyQualifiedTypeName name="java.util.Scanner"/>
+<fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
+<fullyQualifiedTypeName name="javax.swing.JLabel"/>
+<fullyQualifiedTypeName name="br.testes.Window"/>
+<fullyQualifiedTypeName name="java.awt.Component"/>
+<fullyQualifiedTypeName name="javax.swing.JFrame"/>
+<fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="javax.persistence.NamedQuery"/>
+</qualifiedTypeNameHistroy>

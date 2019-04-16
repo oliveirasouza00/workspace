@@ -1,0 +1,461 @@
+<%@  taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
+<script src="https://rawgithub.com/eligrey/FileSaver.js/master/FileSaver.js" type="text/javascript"></script>
+
+<script>
+webshims.setOptions('forms-ext', {types: 'date'});
+webshims.polyfill('forms forms-ext');
+</script>
+
+<div id="content" class="content" data-ng-init="init()">
+			<div id="msgdiv" class="alert alert-danger fade in m-b-15" style="display:none">
+				<span id="msgi"></span>				
+			</div>
+			
+			
+				<div class="buttons">
+					<button ng-click="showBuscaModal()"  class="btn btn-primary m-r-5 m-b-5" style="width: 55px;height: 34px;"><i class="icon ion-ios-search-strong"></i></button>						
+					<button type="button" ng-click="gerarPDF();" class="btn btn-primary m-r-5 m-b-5"><i class="icon ion-android-document"></i> pdf</button>
+					<button type="button" ng-click="exportData();" class="btn btn-primary m-r-5 m-b-5"><i class="icon ion-android-list"></i> xls</button>
+					
+				</div> 
+			
+			<div class="panel panel-inverse">
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">                        
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>                        
+                    </div>
+                    <h4 class="panel-title">Relatório de Ouvidoria do CSC</h4>
+                </div>
+                              
+                <div class="panel-body" id="exportable">				                 		                   
+                    <table datatable="" st-table="listaRegistrosCSC" st-safe-src="displayRegistrosCSC" class="table table-striped table-bordered dataTable dtr-inline" role="grid" aria-describedby="data-table_info">
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 129px;">PROTOCOLO</th>	
+	                            <th class="sorting_asc" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 129px;">DATA</th>				                           
+		                        <th class="sorting_asc" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 129px;">TIPO</th>	
+		                        <th class="sorting_asc" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 129px;">ÁREA</th>    
+	                            <th class="sorting_asc" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 129px;">REGISTRO</th> 
+	                            <th class="sorting_asc" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 129px;">RESPONSÁVEL</th>
+	                            <th class="sorting_asc" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 129px;">STATUS</th>
+	                            <th class="sorting_asc" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 129px;">ANEXO</th>
+	                            <th class="sorting_asc" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 129px;">ACÕES</th>
+	                            
+	                            <tr>
+									<th colspan="8"><input st-search="" class="form-control" placeholder="Busque na Tabela ..." type="text"/></th>
+								</tr>
+                            </tr>
+                            
+                        </thead>
+                        <tbody>			                            
+	                        <tr class="gradeA odd" role="row" ng-repeat="x in listaRegistrosCSC">
+	                                <td class="sorting_1">{{ x.protocolo }}</td>
+	                                <td class="sorting_1">{{ x.date | date:'dd/MM/yyyy' }}</td>
+	                                <td class="sorting_1">{{ x.tipo }}</td>
+	                                <td class="sorting_1">{{ x.areaCSC.nome }}</td>                                
+	                                <td class="sorting_1">{{ x.registro }}</td>
+	                                <td class="sorting_1">{{ x.areaCSC.responsavel.nomeUsu }}</td>	
+	                                <td class="sorting_1">{{ x.statusAtendimento.nome }}</td>
+	                                <td><button type="button" ng-disabled="desabilitaBotao" ng-click="baixarAnexo(x)" class="btn btn-primary m-r-5 m-b-5"><i class="icon ion-android-document"></i></button></td>		                                                               				                                
+	                                <td>			                                		
+								        
+									         <div class="btn-group m-r-5 m-b-5">
+							                        <a href="javascript:;" class="btn btn-primary"><i class="icon ion-gear-a"></i></a>
+							                        <a href="javascript:;" style="height: 28px;" data-toggle="dropdown" class="btn btn-primary dropdown-toggle" aria-expanded="false">
+							                            <span class="caret"></span>
+							                        </a>
+							                        <ul class="dropdown-menu pull-right">
+							                            <li><a href="" ng-click="showDetail(x)">Análise</a></li>
+								                             <sec:authorize access="hasAnyRole('ROLE_CSC_ADMIN', 'ROLE_ADMIN')">
+								                                <li><a href="" ng-click="showEmailSend(x)">Enviar Responsável</a></li>
+								                             	<li><a href="" ng-click="showEncerrar(x)" ng-show="x.statusAtendimento.nome == 'ATENDIDO'">Encerrar</a></li>
+								                             	<li><a href="" ng-click="showEditResponsavel(x)">Editar Responsável</a></li>
+								                             	<li><a href="" ng-click="excluirRegistro(x)">Excluir Registro</a></li>
+								                             	<li><a href="" ng-click="buscarPorProtocolo(x)">Verificar Solução</a></li>
+								                             	<!-- <li><a href="" ng-click="baixarAnexo(x)">Baixar anexo</a></li> -->
+								                             </sec:authorize>
+							                            
+							                        </ul>
+							                    </div>
+								         
+								         
+	                                </td>				                                
+                            </tr>
+                       </tbody>
+                       <tfoot>
+						<tr>
+							<td colspan="8" class="text-center">
+								<div st-pagination="" st-items-by-page="itemsByPage"></div>
+							</td>
+						</tr>
+					 </tfoot>
+                    </table>			                    
+                   </div>
+                </div>
+	
+	
+				  <!-- Modal Detalhe Resgistro -->
+					<div class="modal fade in"  id="dialogDetail" role="dialog">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					           <div class="modal-header">
+					        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+					          	<h4 class="modal-title">Detalhe do Registro {{registroCsc.protocolo}}</h4>
+						       </div>
+			        			<div class="modal-body">
+			        				<div class="form-group">
+				                     	<label for="nome">Área:
+				                     	</label>
+				                     	   {{registroCsc.areaCSC.nome}}                    
+				                     	                                       							
+				                 	</div>
+				                 	
+			        				<div class="form-group">
+				                     	<label for="nome">Responsável:
+				                     	</label>
+				                     	  {{registroCsc.areaCSC.responsavel.nomeUsu}}                                   							
+				                 	</div>
+				                 	
+				                 	<div class="form-group">
+				                     	<label for="nome">Tipo:
+				                     	</label>
+				                     	  {{registroCsc.tipo}}                                   							
+				                 	</div>
+				                 	
+				                 	<div class="form-group">
+				                     	<label for="nome">Registro:
+				                     	</label>
+				                     	  {{registroCsc.registro}}                                   							
+				                 	</div>
+				                 	
+				       
+				                 	<div class="form-group">
+				                 		<table datatable="mensagens" st-table="mensagens" class="table table-striped table-bordered dataTable dtr-inline" role="grid" aria-describedby="data-table_info">
+				                           <thead>
+				                               <tr>
+				                        		<th>Mensagem</th>
+				                        		<th>Usuário</th>
+				                        		<th>Data</th>
+				                        	   </tr>
+				                           </thead>
+						                   <tbody>	  
+							                  <tr class="gradeA odd" role="row" ng-repeat="x in mensagens">
+							                  	 <td>{{x.mensagem}}</td>
+							                  	 <td>{{x.usuario.nomeUsu}}</td>	
+							                  	 <td>{{x.data | date:'dd/MM/yyyy HH:mm:ss' }}</td>							                  	 
+							                  </tr>
+							                  
+						                   </tbody>
+										</table>
+				                 	</div>
+				                 	
+				                   <sec:authorize access="hasAnyRole('ROLE_CSC_RESPONSAVEL_AREA', 'ROLE_ADMIN')">
+					                 	<div class="form-group">				                     	
+					                     	 <textarea rows="4"  cols="70" placeholder="Resposta..." ng-disabled="registroCsc.statusAtendimento.nome == 'ENCERRADO'" ng-model="registroCsc.msgAdicional"></textarea>                                   							
+					                 	</div>
+					                 	
+					                 	<div class="modal-footer">
+									        <button type="button" class="btn btn-primary" ng-disabled="registroCsc.statusAtendimento.nome == 'ENCERRADO'" ng-click="alterarRegistro()">Responder</button>								        
+									    </div>
+				                 	</sec:authorize>
+			        				
+							    </div>
+					      <div class="modal-footer">
+					        
+					        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+					      </div>
+					  </div>
+					</div>
+				</div>  
+                <!-- Modal Detalhe Resgistro -->	
+                
+                 <!-- Modal Email Send -->
+					<div class="modal fade in"  id="showEmailSend" role="dialog">
+					
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					           <div class="modal-header">
+					        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+					          	<h4 class="modal-title">Notificar Responsável da Área por Email</h4>
+						       </div>
+			        			<div class="modal-body">
+			        				<div class="wrapper">
+						                <div class="p-30 bg-white">
+						                    <!-- begin email form -->
+						                    <form action="" name="email_to_form" class="ng-pristine ng-valid">						                        
+						                        <div class="form-group">
+				                                    <label for="nome">Para
+				                                    <span class="text-danger">*</span>
+				                                    </label>
+				                                    <input type="text" class="form-control" id="nome" ng-disabled="registroCsc.statusAtendimento.nome == 'ENCERRADO'" ng-model="registroCsc.areaCSC.responsavel.email" required>					                                 							
+				                                </div>
+				                                <div class="form-group">
+				                                    <label for="nome">Protocólo: {{registroCsc.protocolo}}                                   
+				                                    </label>
+				                                    <br>
+				                                    <label for="nome">Registro: {{registroCsc.registro}}                               
+				                                    </label>
+				                                    			                                    						
+				                                </div>				          
+					                                <div class="form-group">
+					                                    <label for="nome">Mensagem Adicional
+					                                    <span class="text-danger"></span>
+					                                    </label>
+					                                    <textarea class="form-control"  ng-model="registroCsc.msgAdicional" ng-disabled="registroCsc.statusAtendimento.nome == 'ENCERRADO'" placeholder="Textarea" rows="5"></textarea>                                    	
+					                                  				                                 							
+					                                </div>
+					                              
+				                             
+				                                <button type="button" class="btn btn-primary" ng-disabled="registroCsc.statusAtendimento.nome == 'ENCERRADO'" ng-click="notificarEmailResponsavel()" data-dismiss="modal"><i class="fa fa-send fa-fw m-r-5"></i>Enviar</button>
+						                    </form>
+						                    <!-- end email form -->
+						                </div>
+						            </div>
+			        				
+							    </div>
+					      <div class="modal-footer">
+				
+					        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+					      </div>
+					  </div>
+					</div>
+				</div>  
+                <!-- Modal Email Send -->	
+				
+				
+				
+				<!-- Modal Buscar -->
+					<div class="modal fade in"  id="buscarModal" role="dialog">					
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					           <div class="modal-header">
+					        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+					          	<h4 class="modal-title">Buscar Ouvidoria</h4>
+						       </div>
+			        			<div class="modal-body">
+			        				<div class="wrapper">
+						                <div class="p-30 bg-white">
+						                    <!-- begin email form -->
+						                    <form action="" name="buscarRegistro" class="ng-pristine ng-valid">						                        
+						                        
+						                       
+						                        <div class="col-md-6">
+												 	<div class="form-group">
+														<label for="login">Data Inicial</label>
+													 	<input type="date" id="inicioDate" name="input" ng-model="registroCsc.date"
+							       						placeholder="dd-mm-yyyy" class="form-control ng-pristine ng-valid ng-empty ng-touched" ng-required="required" />
+												 	</div>
+											 	</div>
+											 
+											 	<div class="col-md-6">
+												 	<div class="form-group">
+														<label for="login">Data Final</label>
+													 	<input type="date" id="fimDate" name="input" ng-model="registroCsc.dateFim"
+							       						placeholder="dd-mm-yyyy" class="form-control ng-pristine ng-valid ng-empty ng-touched" ng-required="required" />
+												 	</div>
+												</div>
+												
+												<div class="col-md-6">
+						                         <div class="form-group">
+													<label>Tipo *</label>
+													<ui-select ng-model="registroCsc.tipo" data-style="btn-white">
+														<ui-select-match placeholder="Selecione">{{$select.selected.name}}</ui-select-match>
+														<ui-select-choices repeat="item.key as item in tipos"> 
+															<div ng-bind-html="item.name"></div>
+														</ui-select-choices>
+													</ui-select>
+												 </div>                            							
+							                 	</div>
+							                 	
+							                 	<sec:authorize access="hasAnyRole('ROLE_CSC_ADMIN', 'ROLE_ADMIN')">
+							                 	<div class="col-md-6">
+							                 	    <div class="form-group">						                         
+								                     	<label for="nome">Área
+								                     	</label>
+								                     	<ui-select ng-model="registroCsc.areaCSC" data-style="btn-white">
+															<ui-select-match placeholder="Responsável">{{$select.selected.nome}}</ui-select-match>
+															<ui-select-choices repeat="item in listAreaResponsavel"> 
+																<div ng-bind-html="item.nome"></div>
+																  <small>
+															        							  
+															      </small>
+															</ui-select-choices>
+														</ui-select>												                               							
+							                 	</div>
+												</div>
+												</sec:authorize>
+												                        
+				                                
+						                    </form>
+						                    <!-- end email form -->
+						                </div>
+						            </div>
+			        				
+							    </div>
+					       <div class="modal-footer" style="border: none;">
+							<button type="button" class="btn btn-primary" ng-click="buscarRegistrosPorRegistro()" data-dismiss="modal"><i class="fa fa-send fa-fw m-r-5"></i>Buscar</button>
+					        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+					      </div>
+					  </div>
+					</div>
+				</div>  
+                <!-- Modal Buscar -->	
+				
+				
+				
+				<!-- Modal Encerrar -->
+					<div class="modal fade in"  id="dialogEncerrar" role="dialog">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					           <div class="modal-header">
+					        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+					          	<h4 class="modal-title">Encerrar Registro {{registroCsc.protocolo}}</h4>
+						       </div>
+			        			<div class="modal-body">
+			        				<div class="form-group">
+				                     	<label for="nome">Área:
+				                     	</label>
+				                     	   {{registroCsc.areaCSC.nome}}                    
+				                     	                                       							
+				                 	</div>
+				                 	
+			        				<div class="form-group">
+				                     	<label for="nome">Responsável:
+				                     	</label>
+				                     	  {{registroCsc.areaCSC.responsavel.nomeUsu}}                                   							
+				                 	</div>
+				                
+				                 	<div class="form-group">
+				                     	<label for="nome">Resposta do CSC:
+				                     	</label>
+				                     	  {{registroCsc.respostaResponsavel}}                                   							
+				                 	</div>
+				                 	
+				                  
+				                 	<div class="form-group">				                     	
+				                     	 <textarea rows="4"  cols="70" placeholder="Resposta para o cliente..." ng-disabled="registroCsc.statusAtendimento.nome == 'ENCERRADO'" ng-model="registroCsc.respostaCliente"></textarea>                                   							
+				                 	</div>
+				                 	
+				                 	<div class="modal-footer">
+								        <button type="button" class="btn btn-primary" ng-disabled="registroCsc.statusAtendimento.nome == 'ENCERRADO'" ng-click="encerrarRegistro()">Encerrar Registro</button>								        
+								    </div>
+				                 	
+			        				
+							    </div>
+						      	<div class="modal-footer">						        
+						        	<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+						      	</div>
+					  </div>
+					</div>
+				</div>  
+                <!-- Modal Encerrar -->	
+				
+				
+				<!-- Modal Area Edit -->
+					<div class="modal fade in"  id="dialogResponsavelArea" role="dialog">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					           <div class="modal-header">
+					        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+					          	<h4 class="modal-title">Aplicar Novo Responsável</h4>
+						       </div>
+			        			<div class="modal-body">
+			        					
+				                 	<div class="form-group">
+				                     	<label for="nome">Responsável do Setor
+				                     	</label>
+				                     	<ui-select ng-model="registroCsc.areaCSC" data-style="btn-white">
+											<ui-select-match placeholder="Responsável">{{$select.selected.responsavel.nomeUsu}}</ui-select-match>
+											<ui-select-choices repeat="item in listAreaResponsavel"> 
+												<div ng-bind-html="item.nome"></div>
+												  <small>
+											        Usuário: {{item.responsavel.nomeUsu}}								  
+											      </small>
+											</ui-select-choices>
+										</ui-select>	
+										                            							
+				                 	</div>
+         
+							    </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-primary" ng-click="aplicarAreaRegistro()" data-dismiss="modal">Aplivar e Salvar</button>
+					        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+					      </div>
+					  </div>
+					</div>
+				</div>  
+                <!-- Modal Area Edit -->
+                
+                
+                
+                <!-- Modal Excluir -->
+					<div class="modal fade in"  id="excluirRegistro" role="dialog">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					           <div class="modal-header">
+					        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+					          	<h4 class="modal-title">Excluir Registro</h4>
+						       </div>
+			        			<div class="modal-body">
+			        				Deseja Excluir o Registro:	
+				                    {{registroCsc.protocolo}}         
+							    </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-primary" ng-click="aplicarExcluirRegistro()" data-dismiss="modal">Excluir</button>
+					        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+					      </div>
+					  </div>
+					</div>
+				</div>  
+                <!-- Modal Excluir -->
+				
+				<!-- Modal Detalhe Resgistro -->
+					<div class="modal fade in"  id="dialogProtocolo" role="dialog">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					           <div class="modal-header">
+					        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+					          	<h4 class="modal-title">Detalhe do Registro</h4>
+						       </div>
+			        			<div class="modal-body">
+			        				<div class="form-group">
+				                     	<label for="nome">Protocolo:
+				                     	</label>
+				                     	  {{registroAberto.protocolo}}                  
+				                     	                                       							
+				                 	</div>
+				                 	<div class="form-group">
+				                     	<label for="nome">Estatus do Atendimento:
+				                     	</label>
+				                     	  {{registroAberto.statusAtendimento.nome == null ? 'EM ATENDIMENTO' : registroAberto.statusAtendimento.nome}}                  
+				                     	                                       							
+				                 	</div>
+				                 	
+				                 	<div class="form-group">
+				                     	<label for="nome">Área:
+				                     	</label>
+				                     	  {{registroAberto.areaCSC.nome}}                  
+				                     	                                       							
+				                 	</div>
+				                 	
+				                 	<div class="form-group">
+				                     	<label for="nome">Resposta do CSC:
+				                     	<br>
+				                     	</label>
+				                     	  {{registroAberto.respostaCliente == null ? 'Em Análise...' : registroAberto.respostaCliente}}                  
+				                     	                                       							
+				                 	</div>
+				                 	
+				                 
+				                 	
+							    </div>
+					      <div class="modal-footer">					        
+					        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+					      </div>
+					  </div>
+					</div>
+				</div>  
+                <!-- Modal Detalhe Resgistro -->
+			
+</div>

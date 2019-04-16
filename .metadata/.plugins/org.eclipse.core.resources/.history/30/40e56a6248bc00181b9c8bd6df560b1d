@@ -1,0 +1,20 @@
+package teste.br.com.marquise;
+
+public class Teste {
+
+	public static void main(String[] args) {
+		
+		int idade;
+		idade = 15;
+		
+		System.out.println(idade);
+		
+		int IdadeAnoQueVem;
+		IdadeAnoQueVem = idade+1;
+		
+		System.out.println(IdadeAnoQueVem);
+		
+
+	}
+
+}

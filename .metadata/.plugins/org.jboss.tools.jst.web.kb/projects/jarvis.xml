@@ -1,0 +1,1243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kb-project>
+ <depends-on-projects/>
+ <used-by-projects/>
+ <paths>
+  <path value="D:/Users/u218663/.m2/repository/aopalliance/aopalliance/1.0/aopalliance-1.0.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/commons-collections/commons-collections/3.2.1/commons-collections-3.2.1.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/apache/poi/poi-ooxml-schemas/3.12/poi-ooxml-schemas-3.12.jar"/>
+  <path value="D:/wildfly-8.2.0.Final/modules/system/layers/base/javax/ejb/api/main/jboss-ejb-api_3.2_spec-1.0.0.Final.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/bouncycastle/bctsp-jdk14/1.38/bctsp-jdk14-1.38.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/br/com/caelum/iogi/1.0.0/iogi-1.0.0.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/jakarta-regexp/jakarta-regexp/1.4/jakarta-regexp-1.4.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/bouncycastle/bcmail-jdk14/1.38/bcmail-jdk14-1.38.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/commons-codec/commons-codec/1.9/commons-codec-1.9.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/springframework/spring-aop/4.1.6.RELEASE/spring-aop-4.1.6.RELEASE.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/quartz-scheduler/quartz-jobs/2.2.1/quartz-jobs-2.2.1.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/log4j/log4j/1.2.17/log4j-1.2.17.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/junit/junit/4.12/junit-4.12.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/com/google/code/gson/gson/2.2.4/gson-2.2.4.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/jfree/jcommon/1.0.15/jcommon-1.0.15.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/javax/ejb/javax.ejb-api/3.2/javax.ejb-api-3.2.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/springframework/spring-tx/3.2.0.RELEASE/spring-tx-3.2.0.RELEASE.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/springframework/spring-context/4.2.5.RELEASE/spring-context-4.2.5.RELEASE.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/slf4j/slf4j-api/1.7.5/slf4j-api-1.7.5.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/springframework/spring-expression/4.2.5.RELEASE/spring-expression-4.2.5.RELEASE.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/c3p0/c3p0/0.9.1.1/c3p0-0.9.1.1.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/io/netty/netty-common/4.0.52.Final/netty-common-4.0.52.Final.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/apache/commons/commons-lang3/3.4/commons-lang3-3.4.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/javax/servlet/jstl/1.2/jstl-1.2.jar">
+   <libraries>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar-1/meta-inf/c-1_0-rt.tld" project="jarvis"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar-1/meta-inf/c-1_0.tld" project="jarvis"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar-1/meta-inf/c.tld" project="jarvis"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar-1/meta-inf/fmt-1_0-rt.tld" project="jarvis"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar-1/meta-inf/fmt-1_0.tld" project="jarvis"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar-1/meta-inf/fmt.tld" project="jarvis"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar-1/meta-inf/fn.tld" project="jarvis"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar-1/meta-inf/permittedtaglibs.tld" project="jarvis"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar-1/meta-inf/scriptfree.tld" project="jarvis"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar-1/meta-inf/sql-1_0-rt.tld" project="jarvis"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar-1/meta-inf/sql-1_0.tld" project="jarvis"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar-1/meta-inf/sql.tld" project="jarvis"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar-1/meta-inf/x-1_0-rt.tld" project="jarvis"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar-1/meta-inf/x-1_0.tld" project="jarvis"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar-1/meta-inf/x.tld" project="jarvis"/>
+    </library>
+   </libraries>
+  </path>
+  <path value="D:/Users/u218663/.m2/repository/org/jboss/jandex/1.2.2.Final/jandex-1.2.2.Final.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/apache/lucene/lucene-core/4.5.1/lucene-core-4.5.1.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/apache/geronimo/specs/geronimo-jta_1.1_spec/1.1.1/geronimo-jta_1.1_spec-1.1.1.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/io/netty/netty-buffer/4.0.52.Final/netty-buffer-4.0.52.Final.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/br/com/caelum/vraptor/vraptor-javatime/4.0.0.Final/vraptor-javatime-4.0.0.Final.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/apache/lucene/lucene-analyzers-common/4.5.1/lucene-analyzers-common-4.5.1.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/javax/mail/javax.mail-api/1.5.5/javax.mail-api-1.5.5.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/apache/lucene/lucene-queryparser/4.5.1/lucene-queryparser-4.5.1.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/codehaus/groovy/groovy-all/2.4.7/groovy-all-2.4.7.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/json/json/20090211/json-20090211.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/com/google/zxing/core/2.3.0/core-2.3.0.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/javax/ws/rs/jsr311-api/1.1.1/jsr311-api-1.1.1.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/javax/javaee-web-api/7.0/javaee-web-api-7.0.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/javax/transaction/javax.transaction-api/1.2/javax.transaction-api-1.2.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/commons-lang/commons-lang/2.6/commons-lang-2.6.jar"/>
+  <path value="D:/wildfly-8.2.0.Final/modules/system/layers/base/org/jboss/ejb3/main/jboss-ejb3-ext-api-2.1.0.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/springframework/security/spring-security-taglibs/4.0.1.RELEASE/spring-security-taglibs-4.0.1.RELEASE.jar">
+   <libraries>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-spring-security-taglibs-4.0.1.RELEASE.jar/meta-inf/security.tld" project="jarvis"/>
+    </library>
+   </libraries>
+  </path>
+  <path value="D:/Users/u218663/.m2/repository/com/mchange/mchange-commons-java/0.2.10/mchange-commons-java-0.2.10.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/commons-beanutils/commons-beanutils/1.9.0/commons-beanutils-1.9.0.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/hibernate/common/hibernate-commons-annotations/5.0.0.Final/hibernate-commons-annotations-5.0.0.Final.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/net/vidageek/mirror/1.6.1/mirror-1.6.1.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.1.4/jackson-annotations-2.1.4.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/apache/lucene/lucene-queries/4.5.1/lucene-queries-4.5.1.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/io/netty/netty-codec-http/4.0.52.Final/netty-codec-http-4.0.52.Final.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/cglib/cglib-nodep/3.2.0/cglib-nodep-3.2.0.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/com/auth0/java-jwt/2.1.0/java-jwt-2.1.0.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/bouncycastle/bcprov-jdk14/138/bcprov-jdk14-138.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/quartz-scheduler/quartz/2.2.1/quartz-2.2.1.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/apache/logging/log4j/log4j-api/2.4.1/log4j-api-2.4.1.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/br/com/prixma/vraptor-tasks/4.2.0/vraptor-tasks-4.2.0.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/hibernate/javax/persistence/hibernate-jpa-2.1-api/1.0.0.Final/hibernate-jpa-2.1-api-1.0.0.Final.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/xmlpull/xmlpull/1.1.3.1/xmlpull-1.1.3.1.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/commons-digester/commons-digester/2.1/commons-digester-2.1.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/mybatis/mybatis/3.4.6/mybatis-3.4.6.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/javax/validation/validation-api/1.1.0.Final/validation-api-1.1.0.Final.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/commons-httpclient/commons-httpclient/3.1/commons-httpclient-3.1.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.1.4/jackson-databind-2.1.4.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/net/sf/jasperreports/jasperreports/6.1.0/jasperreports-6.1.0.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/apache/poi/poi-ooxml/3.12/poi-ooxml-3.12.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/hibernate/hibernate-entitymanager/5.0.2.Final/hibernate-entitymanager-5.0.2.Final.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/apache/logging/log4j/log4j-core/2.4.1/log4j-core-2.4.1.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/codehaus/plexus/plexus-utils/3.0.22/plexus-utils-3.0.22.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/codehaus/jackson/jackson-mapper-asl/1.9.9/jackson-mapper-asl-1.9.9.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/net/sf/jasperreports/jasperreports-fonts/6.0.0/jasperreports-fonts-6.0.0.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/jfree/jfreechart/1.0.12/jfreechart-1.0.12.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/springframework/spring-beans/4.2.5.RELEASE/spring-beans-4.2.5.RELEASE.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/eclipse/jdt/core/compiler/ecj/4.3.1/ecj-4.3.1.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/bouncycastle/bcprov-jdk14/1.38/bcprov-jdk14-1.38.jar"/>
+  <path value="D:/wildfly-8.2.0.Final/modules/system/layers/base/org/jboss/as/ejb3/main/wildfly-ejb3-8.2.0.Final.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/antlr/antlr/2.7.7/antlr-2.7.7.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/jboss/ejb3/jboss-ejb3-ext-api/2.2.0.Final/jboss-ejb3-ext-api-2.2.0.Final.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/com/sun/jersey/jersey-bundle/1.14/jersey-bundle-1.14.jar">
+   <libraries>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jersey-bundle-1.14.jar/meta-inf/taglib.tld" project="jarvis"/>
+    </library>
+   </libraries>
+  </path>
+  <path value="D:/Users/u218663/.m2/repository/javax/enterprise/cdi-api/1.1/cdi-api-1.1.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/springframework/spring-orm/4.1.6.RELEASE/spring-orm-4.1.6.RELEASE.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/javax/annotation/jsr250-api/1.0/jsr250-api-1.0.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/codehaus/jackson/jackson-core-asl/1.9.9/jackson-core-asl-1.9.9.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/io/netty/netty-handler/4.0.52.Final/netty-handler-4.0.52.Final.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/apache/maven/maven-model/3.3.9/maven-model-3.3.9.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/jboss/spec/javax/interceptor/jboss-interceptors-api_1.1_spec/1.0.0.Beta1/jboss-interceptors-api_1.1_spec-1.0.0.Beta1.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/jboss/logging/jboss-logging/3.3.0.Final/jboss-logging-3.3.0.Final.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/com/thoughtworks/xstream/xstream/1.4.7/xstream-1.4.7.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/xml-apis/xml-apis/1.3.02/xml-apis-1.3.02.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/commons-io/commons-io/2.5/commons-io-2.5.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/br/com/caelum/vraptor/4.2.0-RC3/vraptor-4.2.0-RC3.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/codehaus/castor/castor-core/1.3.3/castor-core-1.3.3.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/springframework/security/spring-security-config/4.0.0.RELEASE/spring-security-config-4.0.0.RELEASE.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/asynchttpclient/netty-codec-dns/2.0.37/netty-codec-dns-2.0.37.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/com/thoughtworks/paranamer/paranamer/2.7/paranamer-2.7.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/io/netty/netty-transport-native-epoll/4.0.52.Final/netty-transport-native-epoll-4.0.52.Final-linux-x86_64.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/springframework/spring-jdbc/3.2.0.RELEASE/spring-jdbc-3.2.0.RELEASE.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/commons-fileupload/commons-fileupload/1.3/commons-fileupload-1.3.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/apache/poi/poi/3.12/poi-3.12.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/javax/xml/stream/stax-api/1.0-2/stax-api-1.0-2.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/stax/stax-api/1.0.1/stax-api-1.0.1.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/io/netty/netty-transport/4.0.52.Final/netty-transport-4.0.52.Final.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/com/google/guava/guava/15.0/guava-15.0.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/postgresql/postgresql/9.4.1208.jre6/postgresql-9.4.1208.jre6.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/springframework/spring-web/4.2.5.RELEASE/spring-web-4.2.5.RELEASE.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/com/itextpdf/itextpdf/5.5.13/itextpdf-5.5.13.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/olap4j/olap4j/0.9.7.309-JS-3/olap4j-0.9.7.309-JS-3.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/asynchttpclient/async-http-client-netty-utils/2.0.37/async-http-client-netty-utils-2.0.37.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/asynchttpclient/netty-resolver-dns/2.0.37/netty-resolver-dns-2.0.37.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/hibernate/hibernate-c3p0/5.0.2.Final/hibernate-c3p0-5.0.2.Final.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/springframework/spring-core/4.2.5.RELEASE/spring-core-4.2.5.RELEASE.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/asynchttpclient/netty-resolver/2.0.37/netty-resolver-2.0.37.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/javax/interceptor/javax.interceptor-api/1.2/javax.interceptor-api-1.2.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/springframework/security/spring-security-web/4.0.4.RELEASE/spring-security-web-4.0.4.RELEASE.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/bouncycastle/bcmail-jdk14/138/bcmail-jdk14-138.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/com/lowagie/itext/2.1.7.js2/itext-2.1.7.js2.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/javax/el/el-api/2.2/el-api-2.2.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/apache/xmlbeans/xmlbeans/2.6.0/xmlbeans-2.6.0.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/springframework/security/spring-security-acl/4.0.1.RELEASE/spring-security-acl-4.0.1.RELEASE.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/com/typesafe/netty/netty-reactive-streams/1.0.8/netty-reactive-streams-1.0.8.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/io/netty/netty-codec/4.0.52.Final/netty-codec-4.0.52.Final.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/springframework/security/spring-security-core/4.0.4.RELEASE/spring-security-core-4.0.4.RELEASE.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/hibernate/hibernate-core/5.0.2.Final/hibernate-core-5.0.2.Final.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/javassist/javassist/3.18.1-GA/javassist-3.18.1-GA.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/xpp3/xpp3_min/1.1.4c/xpp3_min-1.1.4c.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/apache/lucene/lucene-sandbox/4.5.1/lucene-sandbox-4.5.1.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/javax/annotation/javax.annotation-api/1.2/javax.annotation-api-1.2.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/codehaus/castor/castor-xml/1.3.3/castor-xml-1.3.3.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.1.4/jackson-core-2.1.4.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/asynchttpclient/async-http-client/2.0.37/async-http-client-2.0.37.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/org/reactivestreams/reactive-streams/1.0.0/reactive-streams-1.0.0.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/jstl/jstl/1.2/jstl-1.2.jar">
+   <libraries>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/c-1_0-rt.tld" project="jarvis"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/c-1_0.tld" project="jarvis"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/c.tld" project="jarvis"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/fmt-1_0-rt.tld" project="jarvis"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/fmt-1_0.tld" project="jarvis"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/fmt.tld" project="jarvis"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/fn.tld" project="jarvis"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/permittedtaglibs.tld" project="jarvis"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/scriptfree.tld" project="jarvis"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/sql-1_0-rt.tld" project="jarvis"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/sql-1_0.tld" project="jarvis"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/sql.tld" project="jarvis"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/x-1_0-rt.tld" project="jarvis"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/x-1_0.tld" project="jarvis"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/x.tld" project="jarvis"/>
+    </library>
+   </libraries>
+  </path>
+  <path value="D:/Users/u218663/.m2/repository/com/mchange/c3p0/0.9.5.1/c3p0-0.9.5.1.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/javax/inject/javax.inject/1/javax.inject-1.jar"/>
+  <path value="D:/Users/u218663/.m2/repository/stax/stax/1.2.0/stax-1.2.0.jar"/>
+ </paths>
+ <validation>
+  <core validator-id="jsf-verification"/>
+  <core validator-id="jboss.cdi.core">
+   <linked-resource name="%1;" path="%0"/>
+   <linked-resource name="%1;" path="%2"/>
+   <linked-resource name="%4;%5;" path="%3"/>
+   <linked-resource name="%7;" path="%6"/>
+   <linked-resource name="%9;%10;" path="%8"/>
+   <linked-resource name="%12;" path="%11"/>
+   <linked-resource name="%1;" path="%13"/>
+   <linked-resource name="%15;" path="%14"/>
+   <linked-resource name="%17;%18;" path="%16"/>
+   <linked-resource name="%20;" path="%19"/>
+   <linked-resource name="%22;" path="%21"/>
+   <linked-resource name="%24;" path="%23"/>
+   <linked-resource
+    name="%26;%4;%27;%28;%29;%30;%31;%32;%5;%33;%34;%35;%36;%37;%38;%9;%7;%15;%12;%39;%40;%0;%41;%42;%13;%43;%18;%17;%44;%3;%45;%24;%46;%47;%48;%49;%1;%50;%51;%52;%22;%53;%54;%55;%10;%56;%57;%58;" path="%25"/>
+   <linked-resource name="%58;" path="%59"/>
+   <linked-resource name="%9;%10;" path="%60"/>
+   <linked-resource name="%9;%17;%10;%48;%57;" path="%61"/>
+   <linked-resource name="%3;%22;%5;%36;" path="%62"/>
+   <linked-resource name="%1;" path="%12"/>
+   <linked-resource name="%15;" path="%63"/>
+   <linked-resource name="%22;" path="%64"/>
+   <linked-resource name="%9;%10;" path="%65"/>
+   <linked-resource name="%17;%18;" path="%66"/>
+   <linked-resource name="%22;" path="%67"/>
+   <linked-resource name="%22;" path="%68"/>
+   <linked-resource name="%49;" path="%69"/>
+   <linked-resource name="%4;%3;%31;%5;%36;" path="%70"/>
+   <linked-resource name="%9;%10;" path="%71"/>
+   <linked-resource name="%41;%18;" path="%72"/>
+   <linked-resource name="%7;%4;%46;%56;" path="%73"/>
+   <linked-resource name="%41;%18;" path="%74"/>
+   <linked-resource name="%1;" path="%75"/>
+   <linked-resource name="%3;%5;%36;" path="%76"/>
+   <linked-resource name="%55;%18;" path="%77"/>
+   <linked-resource name="%22;" path="%78"/>
+   <linked-resource name="%52;" path="%79"/>
+   <linked-resource name="%9;%10;" path="%80"/>
+   <linked-resource name="%20;" path="%81"/>
+   <linked-resource name="%4;%17;%52;%29;%3;%39;%31;%53;%5;%37;" path="%82"/>
+   <linked-resource name="%1;" path="%83"/>
+   <linked-resource name="%1;" path="%84"/>
+   <linked-resource name="%10;" path="%85"/>
+   <linked-resource name="%4;%3;" path="%49"/>
+   <linked-resource name="%41;" path="%86"/>
+   <linked-resource name="%26;%44;%40;" path="%87"/>
+   <linked-resource name="%46;" path="%88"/>
+   <linked-resource name="%35;" path="%89"/>
+   <linked-resource name="%4;%36;" path="%90"/>
+   <linked-resource name="%15;%38;" path="%91"/>
+   <linked-resource name="%4;%3;%31;%5;%18;" path="%92"/>
+   <linked-resource name="%9;" path="%93"/>
+   <linked-resource name="%18;" path="%94"/>
+   <linked-resource name="%22;" path="%95"/>
+   <linked-resource name="%15;%35;" path="%96"/>
+   <linked-resource name="%46;" path="%97"/>
+   <linked-resource name="%53;" path="%98"/>
+   <linked-resource name="%28;%39;%53;%42;%18;" path="%99"/>
+   <linked-resource name="%46;" path="%100"/>
+   <linked-resource name="%13;" path="%101"/>
+   <linked-resource name="%9;" path="%102"/>
+   <linked-resource name="%4;" path="%103"/>
+   <linked-resource name="%9;" path="%104"/>
+   <linked-resource name="%3;" path="%105"/>
+   <linked-resource name="%7;" path="%106"/>
+   <linked-resource name="%44;%40;%10;" path="%107"/>
+   <linked-resource name="%18;" path="%108"/>
+   <linked-resource name="%10;" path="%109"/>
+   <linked-resource name="%30;" path="%110"/>
+   <linked-resource name="%51;" path="%111"/>
+   <linked-resource name="%51;" path="%112"/>
+   <linked-resource name="%45;" path="%113"/>
+   <linked-resource name="%52;" path="%114"/>
+   <linked-resource name="%9;" path="%115"/>
+   <linked-resource
+    name="%26;%4;%27;%28;%29;%30;%31;%32;%5;%33;%34;%35;%36;%37;%38;%9;%7;%15;%12;%39;%40;%0;%41;%42;%13;%43;%18;%17;%44;%3;%45;%24;%46;%47;%48;%49;%1;%50;%51;%52;%22;%53;%54;%55;%10;%56;%57;%58;" path="%116"/>
+   <linked-resource name="%7;%51;%39;%53;%18;" path="%117"/>
+   <linked-resource name="%58;" path="%118"/>
+   <linked-resource name="%4;%3;%31;%5;%18;" path="%119"/>
+   <linked-resource name="%15;%17;%52;%54;%55;%41;%35;%38;%18;" path="%120"/>
+   <linked-resource name="%26;%10;" path="%121"/>
+   <linked-resource name="%24;" path="%122"/>
+   <linked-resource name="%4;%54;" path="%123"/>
+   <linked-resource name="%7;" path="%124"/>
+   <linked-resource name="%27;%10;" path="%125"/>
+   <linked-resource name="%22;" path="%126"/>
+   <linked-resource name="%15;%35;" path="%127"/>
+   <linked-resource name="%9;%17;%10;%48;%57;" path="%128"/>
+   <linked-resource name="%51;" path="%129"/>
+   <linked-resource name="%9;%10;" path="%130"/>
+   <linked-resource name="%47;" path="%131"/>
+   <linked-resource name="%5;" path="%132"/>
+   <linked-resource name="%17;%18;" path="%133"/>
+   <linked-resource name="%55;%18;" path="%134"/>
+   <linked-resource name="%9;%10;" path="%135"/>
+   <linked-resource name="%4;%3;%31;%5;%18;" path="%136"/>
+   <linked-resource name="%28;%39;%53;%42;%18;" path="%137"/>
+   <linked-resource name="%4;%3;" path="%138"/>
+   <linked-resource name="%15;%38;" path="%139"/>
+   <linked-resource name="%49;" path="%140"/>
+   <linked-resource name="%4;%36;" path="%36"/>
+   <linked-resource name="%46;" path="%141"/>
+   <linked-resource name="%55;%18;" path="%142"/>
+   <linked-resource name="%7;%51;%39;%53;%18;" path="%143"/>
+   <linked-resource name="%26;%10;" path="%144"/>
+   <linked-resource name="%7;" path="%145"/>
+   <linked-resource name="%44;%40;%10;" path="%146"/>
+   <linked-resource name="%1;" path="%147"/>
+   <linked-resource name="%28;%42;%18;" path="%148"/>
+   <linked-resource name="%22;" path="%149"/>
+   <linked-resource name="%28;%42;%18;" path="%150"/>
+   <linked-resource name="%7;%51;%39;%53;%18;" path="%151"/>
+   <linked-resource name="%1;" path="%152"/>
+   <linked-resource name="%9;%10;" path="%153"/>
+   <linked-resource name="%3;%31;%5;%46;" path="%154"/>
+   <linked-resource name="%26;%44;%40;" path="%155"/>
+   <linked-resource name="%46;" path="%156"/>
+   <linked-resource name="%30;" path="%157"/>
+   <linked-resource name="%4;%54;" path="%158"/>
+   <linked-resource name="%26;%44;%40;" path="%159"/>
+   <linked-resource name="%46;" path="%160"/>
+   <linked-resource name="%30;" path="%161"/>
+   <linked-resource name="%4;" path="%162"/>
+   <linked-resource name="%55;%18;" path="%163"/>
+   <linked-resource name="%9;%10;" path="%164"/>
+   <linked-resource name="%15;" path="%165"/>
+   <linked-resource name="%15;%38;" path="%166"/>
+   <linked-resource name="%50;" path="%167"/>
+   <linked-resource name="%9;%10;" path="%168"/>
+   <linked-resource name="%9;%7;%4;%17;%28;%32;%33;%34;%56;%43;%58;" path="%169"/>
+   <linked-resource name="%28;%42;%18;" path="%170"/>
+   <linked-resource name="%9;%7;%4;%17;%28;%32;%33;%34;%56;%43;%58;" path="%171"/>
+   <linked-resource name="%39;%53;%46;%1;%58;" path="%20"/>
+   <linked-resource name="%47;" path="%172"/>
+   <linked-resource name="%5;" path="%173"/>
+   <linked-resource name="%22;" path="%174"/>
+   <linked-resource name="%1;" path="%175"/>
+   <linked-resource name="%9;%10;" path="%176"/>
+   <linked-resource name="%42;%18;" path="%177"/>
+   <linked-resource name="%46;" path="%178"/>
+   <linked-resource name="%15;%35;" path="%179"/>
+   <linked-resource name="%4;%31;" path="%180"/>
+   <linked-resource name="%46;" path="%181"/>
+   <linked-resource name="%17;" path="%182"/>
+   <linked-resource name="%24;" path="%183"/>
+   <linked-resource name="%9;%7;%4;%17;%28;%32;%33;%34;%56;%43;%58;" path="%184"/>
+   <linked-resource name="%46;" path="%185"/>
+   <linked-resource name="%18;" path="%186"/>
+   <linked-resource name="%7;" path="%187"/>
+   <linked-resource name="%45;" path="%188"/>
+   <linked-resource name="%5;" path="%189"/>
+   <linked-resource name="%3;%22;%5;%36;" path="%190"/>
+   <linked-resource name="%22;" path="%191"/>
+   <linked-resource name="%9;%10;" path="%192"/>
+   <linked-resource name="%41;%18;" path="%193"/>
+   <linked-resource name="%52;" path="%194"/>
+   <linked-resource name="%41;%18;" path="%195"/>
+   <linked-resource name="%15;" path="%196"/>
+   <linked-resource name="%0;%10;" path="%197"/>
+   <linked-resource name="%9;%10;" path="%198"/>
+   <linked-resource name="%27;%10;" path="%199"/>
+   <linked-resource name="%15;%17;%52;%54;%55;%41;%35;%18;%38;" path="%200"/>
+   <linked-resource name="%3;%5;%36;" path="%201"/>
+   <linked-resource name="%9;" path="%202"/>
+   <linked-resource name="%4;%3;%31;%5;%18;" path="%203"/>
+   <linked-resource name="%46;" path="%204"/>
+   <linked-resource name="%4;%3;%31;%5;%36;" path="%5"/>
+   <linked-resource name="%22;" path="%205"/>
+   <linked-resource name="%12;" path="%206"/>
+   <linked-resource name="%17;%18;" path="%207"/>
+   <linked-resource name="%5;" path="%208"/>
+   <linked-resource name="%3;%22;%5;%36;" path="%209"/>
+   <linked-resource name="%53;" path="%210"/>
+   <linked-resource name="%9;" path="%211"/>
+   <linked-resource name="%9;%17;%10;%48;%57;" path="%212"/>
+   <linked-resource name="%4;%54;" path="%213"/>
+   <linked-resource name="%46;" path="%214"/>
+   <linked-resource name="%9;%17;%10;%48;%57;" path="%215"/>
+   <linked-resource name="%5;" path="%216"/>
+   <linked-resource name="%42;%18;" path="%217"/>
+   <linked-resource name="%15;" path="%218"/>
+   <linked-resource name="%41;%18;" path="%219"/>
+   <linked-resource name="%55;%18;" path="%220"/>
+   <linked-resource name="%24;" path="%221"/>
+   <linked-resource name="%7;%4;%46;%56;" path="%222"/>
+   <linked-resource name="%22;" path="%223"/>
+   <linked-resource name="%7;" path="%224"/>
+   <linked-resource name="%58;" path="%225"/>
+   <linked-resource name="%7;" path="%33"/>
+   <linked-resource name="%46;" path="%226"/>
+   <linked-resource name="%22;" path="%227"/>
+   <linked-resource name="%4;%31;" path="%31"/>
+   <linked-resource name="%50;" path="%228"/>
+   <linked-resource name="%5;" path="%229"/>
+   <linked-resource name="%55;%18;" path="%230"/>
+   <linked-resource name="%5;" path="%231"/>
+   <linked-resource name="%55;%18;" path="%232"/>
+   <linked-resource name="%22;" path="%233"/>
+   <linked-resource name="%9;%10;" path="%234"/>
+   <linked-resource name="%55;%18;" path="%235"/>
+   <linked-resource name="%0;%10;" path="%236"/>
+   <linked-resource name="%9;%10;" path="%237"/>
+   <linked-resource name="%7;" path="%238"/>
+   <linked-resource name="%38;" path="%239"/>
+   <linked-resource name="%26;%44;%40;%10;" path="%240"/>
+   <linked-resource name="%17;%1;" path="%10"/>
+   <linked-resource name="%7;" path="%241"/>
+   <linked-resource name="%4;%5;" path="%242"/>
+   <linked-resource name="%9;%10;" path="%243"/>
+   <linked-resource name="%28;%39;%53;%42;%18;" path="%244"/>
+   <linked-resource name="%28;%39;%53;%42;%18;" path="%245"/>
+   <linked-resource name="%7;" path="%34"/>
+   <linked-resource name="%18;" path="%246"/>
+   <linked-resource name="%5;" path="%247"/>
+   <linked-resource name="%27;%10;" path="%248"/>
+   <linked-resource name="%42;%18;" path="%249"/>
+   <linked-resource name="%55;%18;" path="%250"/>
+   <linked-resource name="%27;%10;" path="%251"/>
+   <linked-resource name="%30;" path="%252"/>
+   <linked-resource name="%41;%18;" path="%253"/>
+   <linked-resource name="%39;%53;%46;%1;%58;" path="%254"/>
+   <linked-resource name="%22;" path="%255"/>
+   <linked-resource name="%9;%10;" path="%256"/>
+   <linked-resource name="%9;%10;" path="%257"/>
+   <linked-resource name="%26;%44;%40;%10;" path="%258"/>
+   <linked-resource name="%26;%44;%40;%10;" path="%259"/>
+   <linked-resource name="%7;" path="%260"/>
+   <linked-resource name="%9;%10;" path="%261"/>
+   <linked-resource name="%42;%18;" path="%262"/>
+   <linked-resource name="%22;" path="%263"/>
+   <linked-resource name="%7;" path="%264"/>
+   <linked-resource name="%46;" path="%50"/>
+   <linked-resource name="%9;%7;%4;%17;%28;%32;%33;%34;%56;%43;%58;" path="%265"/>
+   <linked-resource name="%41;%18;" path="%266"/>
+   <linked-resource name="%54;" path="%267"/>
+   <linked-resource name="%20;" path="%268"/>
+   <linked-resource name="%13;" path="%269"/>
+   <linked-resource name="%41;%18;" path="%270"/>
+   <linked-resource name="%58;" path="%271"/>
+   <linked-resource name="%55;%18;" path="%272"/>
+   <linked-resource name="%22;" path="%273"/>
+   <linked-resource name="%46;" path="%274"/>
+   <linked-resource name="%3;%22;%5;%36;" path="%275"/>
+   <linked-resource name="%44;%40;%10;" path="%276"/>
+   <linked-resource name="%3;" path="%47"/>
+   <linked-resource name="%55;%18;" path="%277"/>
+   <linked-resource name="%22;" path="%278"/>
+   <linked-resource name="%55;" path="%279"/>
+   <linked-resource name="%3;" path="%280"/>
+   <linked-resource name="%7;" path="%281"/>
+   <linked-resource name="%9;" path="%282"/>
+   <linked-resource name="%1;" path="%283"/>
+   <linked-resource name="%1;" path="%284"/>
+   <linked-resource name="%52;" path="%285"/>
+   <linked-resource name="%3;" path="%286"/>
+   <linked-resource name="%18;" path="%287"/>
+   <linked-resource name="%4;%54;" path="%288"/>
+   <linked-resource name="%15;%38;" path="%289"/>
+   <linked-resource name="%44;%40;%10;" path="%290"/>
+   <linked-resource name="%26;%44;%40;%10;" path="%291"/>
+   <linked-resource name="%55;%18;" path="%292"/>
+   <linked-resource name="%26;%10;" path="%293"/>
+   <linked-resource name="%9;%10;" path="%294"/>
+   <linked-resource name="%4;%17;%52;%29;%3;%39;%31;%53;%5;%37;" path="%295"/>
+   <linked-resource name="%1;" path="%296"/>
+   <linked-resource name="%3;%31;%5;%46;" path="%45"/>
+   <linked-resource name="%52;" path="%297"/>
+   <linked-resource name="%4;%17;%52;%29;%3;%39;%31;%53;%5;%37;" path="%298"/>
+   <linked-resource name="%28;%42;%18;" path="%299"/>
+   <linked-resource name="%4;%17;%52;%29;%3;%39;%31;%53;%5;%37;" path="%300"/>
+   <linked-resource name="%26;%44;%40;" path="%301"/>
+   <linked-resource name="%15;%35;" path="%302"/>
+   <linked-resource name="%7;%51;%39;%53;%18;" path="%303"/>
+   <linked-resource name="%1;" path="%304"/>
+   <linked-resource name="%17;%1;" path="%305"/>
+   <linked-resource name="%26;%10;" path="%306"/>
+   <linked-resource name="%7;" path="%307"/>
+   <linked-resource name="%51;" path="%308"/>
+   <linked-resource name="%22;" path="%309"/>
+   <linked-resource name="%9;" path="%310"/>
+   <linked-resource name="%22;" path="%311"/>
+  </core>
+  <core validator-id="jboss.jsf.core"/>
+  <el>
+   <linked-el length="65" name="%312" offset="10323" path="%313"/>
+   <linked-el length="18" name="%312" offset="9872" path="%313"/>
+   <linked-el length="21" name="%314" offset="1393" path="%315"/>
+   <linked-el length="17" name="%316" offset="2859" path="%317"/>
+   <linked-el length="16" name="%316" offset="1291" path="%315"/>
+   <linked-el length="16" name="%316" offset="1091" path="%318"/>
+   <linked-el length="16" name="%316" offset="1787" path="%318"/>
+   <linked-el length="24" name="%319" offset="8986" path="%313"/>
+   <linked-el length="24" name="%320" offset="8986" path="%313"/>
+   <linked-el length="15" name="%321" offset="2617" path="%317"/>
+   <linked-el length="34" name="%322" offset="1747" path="%318"/>
+   <linked-el length="36" name="%322" offset="2817" path="%317"/>
+   <linked-el length="34" name="%322" offset="1051" path="%318"/>
+   <linked-el length="65" name="%323" offset="10323" path="%313"/>
+   <linked-el length="18" name="%323" offset="9872" path="%313"/>
+   <linked-el length="24" name="%324" offset="8986" path="%313"/>
+   <linked-el length="17" name="%325" offset="2859" path="%317"/>
+   <linked-el length="16" name="%325" offset="1291" path="%315"/>
+   <linked-el length="16" name="%325" offset="1091" path="%318"/>
+   <linked-el length="34" name="%325" offset="1747" path="%318"/>
+   <linked-el length="36" name="%325" offset="2817" path="%317"/>
+   <linked-el length="21" name="%325" offset="1393" path="%315"/>
+   <linked-el length="34" name="%325" offset="1051" path="%318"/>
+   <linked-el length="16" name="%325" offset="1787" path="%318"/>
+   <linked-el length="80" name="%326" offset="10395" path="%313"/>
+   <linked-el length="12" name="%326" offset="8938" path="%313"/>
+  </el>
+ </validation>
+ <aliases>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/EbsFndFlexValueDao.java" value="%110"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/embankment/dao/FlushPlaceVehicleDao.java" value="%302"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/AuthoritiesDao.java" value="%133"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/QuarterDao.java" value="%142"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/controller/AvalaController.java" value="%29"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/centrofashion/dao/CfCaixaLideresDao.java" value="%109"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/incinerador/Service/Impl/CustomersServiceImpl.java" value="%204"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/celulafiscal/dao/RecNfOcLinesDao.java" value="%198"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/impl/SacServiceDaoImpl.java" value="%150"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/SacServiceService.java" value="%299"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/csc/service/impl/MensagemRegistroServiceImpl.java" value="%33"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/csc/service/impl/RegistroCSCServiceImpl.java" value="%34"/>
+  <alias path="/jarvis/src/main/webapp/app/template/template.jsp" value="%315"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/impl/EmailApiImpl.java" value="%73"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/cdc/service/impl/MensagensLoteInlogServiceImpl.java" value="%201"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/OrganizationInformaconService.java" value="%294"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/embankment/dao/FlushPlaceDao.java" value="%288"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/incinerador/dao/MtrDao.java" value="%167"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/csc/dao/impl/AreaCSCDaoImpl.java" value="%238"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/controller/OccurrenceController.java" value="%41"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/qualitor/dao/ContatoQltDao.java" value="%176"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/spg/dao/CustoDao.java" value="%126"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/controller/BaseController.java" value="%43"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/spg/service/ConsultaService.java" value="%227"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/msaf/controller/InterfaceReinfR2020InformaconController.java" value="%44"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/incinerador/Service/PrdCertificateService.java" value="%88"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/OrganizationDao.java" value="%298"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/cdc/service/impl/MqsPrdCdcServiceImpl.java" value="%3"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/spg/dao/impl/CustoDaoImpl.java" value="%278"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/incinerador/Service/SignatureService.java" value="%226"/>
+  <alias path="_csrf.parameterName" value="%322"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/informacon/service/EmpresaInformaconService.java" value="%61"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/impl/PbiUrlDaoImpl.java" value="%285"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/msaf/service/impl/Safx09ServiceImpl.java" value="%107"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/CollectTypeDao.java" value="%72"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/centrofashion/service/Impl/CondicoesPagamentoServiceImpl.java" value="%83"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/msaf/dao/impl/Safx09DaoImpl.java" value="%290"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/centrofashion/service/Impl/BandeirasBancosServiceImpl.java" value="%75"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/cdc/dao/MqsPrdCdcDao.java" value="%286"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/impl/QuarterServiceImpl.java" value="%220"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/centrofashion/dao/Impl/InvoicesCFDaoImpl.java" value="%236"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/EbsFndFlexValueService.java" value="%252"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/msaf/dao/impl/Safx07DaoImpl.java" value="%258"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/msaf/dao/impl/Safx08DaoImpl.java" value="%306"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/impl/UsuarioDaoImpl.java" value="%171"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/ServiceHistDao.java" value="%244"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/UsuarioService.java" value="%265"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/OccurrenceDao.java" value="%266"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/cdc/service/impl/MqsPrdCdcCollectorServiceImpl.java" value="%31"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/impl/OrganizationServiceImpl.java" value="%295"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/impl/CustomerServiceImpl.java" value="%230"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/embankment/controller/FlushPlaceVehicleController.java" value="%35"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/embankment/controller/CameraController.java" value="%38"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/report/ReportMaker.java" value="%254"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/msaf/dao/Safx09Dao.java" value="%276"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/csc/controller/OuvidoriaCSCController.java" value="%7"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/informacon/dao/impl/EmpresaInformaconDaoImpl.java" value="%128"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/spg/service/impl/ConsultarIndicadorServiceImpl.java" value="%174"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/cdc/dao/impl/LoteInlogDaoImpl.java" value="%173"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/cdc/service/MensagemLoteInlogTrackService.java" value="%229"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/qualitor/service/ContatoQltService.java" value="%237"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/csc/dao/RegistroCSCDao.java" value="%124"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/impl/RegionalDaoImpl.java" value="%134"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/embankment/model/FlushPlace.java" value="%267"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/centrofashion/service/Impl/InvoicesCFServiceImpl.java" value="%0"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/SacServiceDao.java" value="%170"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/centrofashion/service/Impl/MetodoRecebimentoServiceImpl.java" value="%13"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/impl/UsuarioServiceImpl.java" value="%169"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/embankment/service/CameraService.java" value="%289"/>
+  <alias path="timestamp" value="%326"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/impl/CircuitDaoImpl.java" value="%92"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/incinerador/Service/Impl/PrdCertificateServiceImpl.java" value="%160"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/OrganizationInformaconDao.java" value="%164"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/msaf/dao/Safx2013Dao.java" value="%248"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/celulafiscal/service/impl/RecNfOcServiceImpl.java" value="%310"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/impl/SubinventoryServiceImpl.java" value="%49"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/cdc/service/MensagensLoteInlogService.java" value="%76"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/cdc/dao/impl/MqsPrdCdcDaoImpl.java" value="%105"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/centrofashion/dao/MetodoRecebimentoDao.java" value="%269"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/OrganizationService.java" value="%300"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/impl/ServiceHistServiceImpl.java" value="%137"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/spg/dao/ContaDao.java" value="%64"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/cdc/service/MqsPrdCdcCollectorService.java" value="%180"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/impl/OccurrenceServiceImpl.java" value="%253"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/controller/BalanceController.java" value="%53"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/cdc/dao/OrgInlogDao.java" value="%216"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/embankment/controller/FlushPlaceController.java" value="%54"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/celulafiscal/dao/RecNfOcDao.java" value="%104"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/celulafiscal/service/RecNfOcService.java" value="%211"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/centrofashion/service/CustomerCFService.java" value="%175"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/impl/CircuitServiceImpl.java" value="%203"/>
+  <alias path="/jarvis/src/main/java/br/com/marquise/dao/ZglDao.java" value="%108"/>
+  <alias path="/jarvis/src/main/java/br/com/marquise/report/Report.java" value="%81"/>
+  <alias path="project" value="%323"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/celulafiscal/service/impl/RecNfOcLinesServiceImpl.java" value="%71"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/cdc/service/TipoFinalizacaoViagemService.java" value="%103"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/csc/service/RegistroCSCService.java" value="%307"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/cdc/service/impl/MqsPrdCollectServiceImpl.java" value="%36"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/centrofashion/dao/InvoicesCFDao.java" value="%197"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/centrofashion/service/MetodoRecebimentoService.java" value="%284"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/impl/CustomerDaoImpl.java" value="%235"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/impl/RegionalServiceImpl.java" value="%163"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/impl/OrganizationInfoDaoImpl.java" value="%308"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/msaf/service/Safx08Service.java" value="%121"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/model/Customer.java" value="%279"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/msaf/service/impl/X04PessoaFisJurServiceImpl.java" value="%159"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/informacon/dao/PedidoInformaconDao.java" value="%80"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/incinerador/Service/CertificateMtrService.java" value="%141"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/AttachmentService.java" value="%143"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/impl/AttachmentServiceImpl.java" value="%151"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/spg/service/impl/CustoServiceImpl.java" value="%205"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/incinerador/Service/Impl/ContractResiduesServiceImpl.java" value="%274"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/controller/UsuarioController.java" value="%17"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/informacon/service/impl/PedidoInformaconServiceImpl.java" value="%60"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/AttachmentDao.java" value="%117"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/embankment/service/impl/FlushPlaceServiceImpl.java" value="%158"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/model/Occurrence.java" value="%86"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/embankment/dao/impl/CameraDaoImpl.java" value="%91"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/incinerador/Service/SetupCertificateService.java" value="%156"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/csc/service/AreaCSCService.java" value="%241"/>
+  <alias path="maven.build.timestamp" value="%324"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/embankment/dao/BalancaDao.java" value="%63"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/centrofashion/controller/CentroFashionController.java" value="%1"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/model/BaseEntity.java" value="%120"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/celulafiscal/service/RecNfOcLinesService.java" value="%257"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/incinerador/Service/Impl/MtrServiceImpl.java" value="%50"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/AuthoritiesService.java" value="%66"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/impl/OrganizationInformaconDaoImpl.java" value="%130"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/centrofashion/dao/InvoicesAuxCFDao.java" value="%11"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/embankment/service/FlushPlaceVehicleService.java" value="%96"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/incinerador/Service/ContractResiduesService.java" value="%97"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/report/ReportXLS.java" value="%19"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/spg/service/impl/FilialServiceImpl.java" value="%273"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/embankment/model/Balanca.java" value="%196"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/controller/DashboardController.java" value="%28"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/spg/service/impl/ContaServiceImpl.java" value="%68"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/controller/EbsFndFlexValueController.java" value="%30"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/csc/dao/impl/MensagemRegistroDaoImpl.java" value="%264"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/PerAllPeopleFService.java" value="%280"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/centrofashion/service/InvoicesCFService.java" value="%2"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/msaf/service/Safx2013Service.java" value="%251"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/impl/InspectorDaoImpl.java" value="%262"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/impl/EbsFndFlexValueDaoImpl.java" value="%157"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/spg/service/ContaService.java" value="%263"/>
+  <alias path="_csrf.token" value="%316"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/cdc/service/impl/LoteInlogTrackServiceImpl.java" value="%132"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/AbstractCrudDao.java" value="%116"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/spg/dao/impl/ConsultaDaoImpl.java" value="%223"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/impl/TaxParameterBalanceDaoImpl.java" value="%98"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/msaf/service/impl/Safx08ServiceImpl.java" value="%144"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/csc/service/MensagemRegistroService.java" value="%145"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/controller/SacServiceController.java" value="%18"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/cdc/service/impl/MensagemLoteInlogTrackServiceImpl.java" value="%208"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/spg/service/FilialService.java" value="%78"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/celulafiscal/dao/impl/RecNfOcLinesDaoImpl.java" value="%153"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/CollectTypeService.java" value="%270"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/centrofashion/dao/Impl/InvoicesAuxDaoImpl.java" value="%206"/>
+  <alias path="/jarvis/src/main/java/br/com/marquise/model/PbiUrl.java" value="%297"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/spg/dao/impl/ConsultarIndicadorDaoImpl.java" value="%255"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/chronos/service/TotalHoraExtraService.java" value="%59"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/spg/dao/ConsultarIndicadorDao.java" value="%311"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/celulafiscal/service/RecNfService.java" value="%202"/>
+  <alias path="_csrf" value="%325"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/impl/PerAllPeopleFServiceImpl.java" value="%47"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/TaxParameterBalanceService.java" value="%210"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/impl/OrganizationDaoImpl.java" value="%82"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/controller/ReportConfigController.java" value="%51"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/PbiUrlService.java" value="%79"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/centrofashion/service/CondicoesPagamentoService.java" value="%84"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/model/SacService.java" value="%287"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/incinerador/Service/Impl/SignatureServiceImpl.java" value="%178"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/impl/AttachmentDaoImpl.java" value="%303"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/qualitor/dao/impl/ContatoQltDaoImpl.java" value="%256"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/cdc/dao/LoteInlogDao.java" value="%231"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/msaf/controller/InterfaceProdutosInformaconController.java" value="%27"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/RegionalService.java" value="%277"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/informacon/dao/EmpresaInformaconDao.java" value="%212"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/api/security/SecurityInterceptor.java" value="%32"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/msaf/dao/Safx08Dao.java" value="%293"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/cdc/service/impl/LoteInlogServiceImpl.java" value="%5"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/impl/OrganizationInfoServiceImpl.java" value="%112"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/centrofashion/service/InvoicesAuxCFService.java" value="%147"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/incinerador/Service/Impl/SetupCertificateServiceImpl.java" value="%185"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/embankment/dao/impl/BalancaDaoImpl.java" value="%165"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/impl/PbiUrlServiceImpl.java" value="%114"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/OrganizationInfoService.java" value="%129"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/centrofashion/service/Impl/InvoicesAuxCFServiceImpl.java" value="%12"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/msaf/dao/impl/Safx2013DaoImpl.java" value="%125"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/incinerador/Service/CustomersService.java" value="%181"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/EmailApi.java" value="%222"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/chronos/service/HoraExtraService.java" value="%271"/>
+  <alias path="project.basedir" value="%312"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/msaf/service/impl/Safx2013ServiceImpl.java" value="%199"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/spg/service/AtividadeService.java" value="%209"/>
+  <alias path="/jarvis/src/main/webapp/app/template/header.jsp" value="%317"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/InspectorDao.java" value="%177"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/impl/EbsGlLedgerServiceImpl.java" value="%122"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/PoHeadersAllDao.java" value="%261"/>
+  <alias
+   path="/jarvis/target/m2e-wtp/web-resources/META-INF/maven/br.com.marquise/jarvis/pom.xml" value="%313"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/spg/dao/impl/FilialDaoImpl.java" value="%21"/>
+  <alias path="/jarvis/src/main/webapp/app/login/view/login.jsp" value="%318"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/incinerador/Service/MtrService.java" value="%214"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/spg/controller/IndicadorController.java" value="%22"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/impl/ZglServiceImpl.java" value="%94"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/centrofashion/service/Impl/CentroFashionServiceImpl.java" value="%10"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/CircuitDao.java" value="%119"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/spg/service/CustoService.java" value="%191"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/informacon/tasks/EmpresaInfraTask.java" value="%57"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/QuarterService.java" value="%232"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/model/AbstractEntity.java" value="%200"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/chronos/controller/HoraExtraController.java" value="%58"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/UsuarioDao.java" value="%184"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/msaf/controller/InterfaceSPEDInformaconController.java" value="%26"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/cdc/controller/PainelCDCController.java" value="%4"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/incinerador/dao/Impl/MtrDaoImpl.java" value="%228"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/cdc/service/LoteInlogTrackService.java" value="%247"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/impl/EbsGlLedgerDaoImpl.java" value="%23"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/SubinventoryService.java" value="%138"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/embankment/dao/impl/FlushPlaceDaoImpl.java" value="%123"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/impl/PerAllPeopleFDaoImpl.java" value="%131"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/PeopleJobsDao.java" value="%188"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/CustomerService.java" value="%77"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/csc/service/impl/AreaCSCServiceImpl.java" value="%224"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/api/controller/ApiController.java" value="%9"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/PoHeadersAllService.java" value="%234"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/CustomerDao.java" value="%250"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/msaf/controller/InterfaceReinfR2010InformaconController.java" value="%40"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/EbsGlLedgerService.java" value="%221"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/spg/service/ConsultarIndicadorService.java" value="%233"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/RegionalDao.java" value="%292"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/CircuitService.java" value="%136"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/OrganizationInfoDao.java" value="%111"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/embankment/dao/CameraDao.java" value="%166"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/incinerador/controller/CertificadoController.java" value="%46"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/ZglService.java" value="%186"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/informacon/tasks/EmpresaIncTask.java" value="%48"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/spg/service/impl/ConsultaServiceImpl.java" value="%309"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/impl/OccurrenceDaoImpl.java" value="%74"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/PerAllPeopleFDao.java" value="%172"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/chronos/service/impl/HoraExtraServiceImpl.java" value="%225"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/spg/dao/FilialDao.java" value="%95"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/impl/ServiceHistDaoImpl.java" value="%99"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/controller/LoginController.java" value="%56"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/impl/CollectTypeServiceImpl.java" value="%195"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/impl/AuthoritiesServiceImpl.java" value="%16"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/msaf/service/impl/Safx07ServiceImpl.java" value="%291"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/centrofashion/dao/Impl/CfCaixaLideresDaoImpl.java" value="%85"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/embankment/dao/impl/FlushPlaceVehicleDaoImpl.java" value="%179"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/impl/PoHeadersAllServiceImpl.java" value="%243"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/celulafiscal/dao/impl/RecNfOcDaoImpl.java" value="%282"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/csc/service/EmailCSCService.java" value="%260"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/cdc/service/MqsPrdCdcService.java" value="%242"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/csc/dao/MensagemRegistroDao.java" value="%106"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/msaf/service/Safx09Service.java" value="%146"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/csc/service/impl/EmailCSCServiceImpl.java" value="%6"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/controller/OrganizationController.java" value="%37"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/embankment/service/impl/FlushPlaceVehicleServiceImpl.java" value="%127"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/PeopleJobsService.java" value="%154"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/msaf/service/Safx07Service.java" value="%240"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/impl/PeopleJobsDaoImpl.java" value="%113"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/impl/SacServiceServiceImpl.java" value="%148"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/impl/EbsFndFlexValueServiceImpl.java" value="%161"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/impl/QuarterDaoImpl.java" value="%272"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/OccurrenceService.java" value="%219"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/controller/AtendimentoController.java" value="%42"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/chronos/service/impl/TotalHoraExtraServiceImpl.java" value="%118"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/embankment/model/Camera.java" value="%239"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/qualitor/service/impl/ContatoQltServiceImpl.java" value="%65"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/impl/AbstractCrudDaoImpl.java" value="%25"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/ServiceHistService.java" value="%245"/>
+  <alias path="maven" value="%320"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/spg/service/impl/AtividadeServiceImpl.java" value="%62"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/report/impl/ReportMakerImpl.java" value="%20"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/celulafiscal/service/impl/RecNfServiceImpl.java" value="%102"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/spg/dao/ConsultaDao.java" value="%67"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/controller/PBIController.java" value="%52"/>
+  <alias path="_csrf.headerName" value="%314"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/embankment/service/impl/CameraServiceImpl.java" value="%139"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/EbsGlLedgerDao.java" value="%183"/>
+  <alias path="logoutUrl" value="%321"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/report/ReportPDF.java" value="%268"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/controller/CustomerController.java" value="%55"/>
+  <alias path="/jarvis/src/main/java/br/com/marquise/dao/PbiUrlDao.java" value="%194"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/msaf/dao/impl/X04PessoaFisJurDaoImpl.java" value="%87"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/centrofashion/service/InvoicesHistoryCFService.java" value="%296"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/cdc/dao/impl/OrgInlogDaoImpl.java" value="%189"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/informacon/service/impl/EmpresaInformaconServiceImpl.java" value="%215"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/embankment/service/BalancaService.java" value="%218"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/msaf/dao/Safx07Dao.java" value="%259"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/spg/dao/AtividadeDao.java" value="%190"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/embankment/service/FlushPlaceService.java" value="%213"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/informacon/service/PedidoInformaconService.java" value="%135"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/impl/InspectorServiceImpl.java" value="%217"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/embankment/service/impl/BalancaServiceImpl.java" value="%14"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/impl/SubinventoryImplDao.java" value="%69"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/SubinventoryDao.java" value="%140"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/InspectorService.java" value="%249"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/centrofashion/service/CentroFashionService.java" value="%305"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/embankment/controller/BalancaController.java" value="%15"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/spg/dao/impl/ContaDaoImpl.java" value="%149"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/impl/CollectTypeDaoImpl.java" value="%193"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/impl/ZglDaoImpl.java" value="%246"/>
+  <alias path="/jarvis/src/main/java/br/com/marquise/model/Usuario.java" value="%182"/>
+  <alias path="maven.build" value="%319"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/controller/ReportController.java" value="%39"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/informacon/dao/impl/PedidoInformaconDaoImpl.java" value="%8"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/celulafiscal/dao/impl/RecNfDaoImpl.java" value="%93"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/msaf/service/X04PessoaFisJurService.java" value="%301"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/impl/PoHeadersAllDaoImpl.java" value="%168"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/centrofashion/dao/Impl/MetodoRecebimentoDaoImpl.java" value="%101"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/centrofashion/service/Impl/CustomerCFServiceImpl.java" value="%283"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/impl/PeopleJobsServiceImpl.java" value="%45"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/cdc/service/MqsPrdCollectService.java" value="%90"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/dao/impl/AuthoritiesDaoImpl.java" value="%207"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/controller/EbsGlLedgerController.java" value="%24"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/celulafiscal/dao/RecNfDao.java" value="%115"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/spg/dao/impl/AtividadeDaoImpl.java" value="%275"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/csc/dao/AreaCSCDao.java" value="%281"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/service/impl/OrganizationInformaconServiceImpl.java" value="%192"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/msaf/dao/X04PessoaFisJurDao.java" value="%155"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/embankment/model/FlushPlaceVehicle.java" value="%89"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/incinerador/Service/Impl/CertificateMtrServiceImpl.java" value="%100"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/cdc/service/impl/TipoFinalizacaoViagemServiceImpl.java" value="%162"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/cdc/service/LoteInlogService.java" value="%70"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/centrofashion/service/BandeirasBancosService.java" value="%304"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/centrofashion/service/Impl/InvoicesHistoryCFServiceImpl.java" value="%152"/>
+  <alias
+   path="/jarvis/src/main/java/br/com/marquise/csc/dao/impl/RegistroCSCDaoImpl.java" value="%187"/>
+ </aliases>
+ <includes/>
+ <uris>
+  <uri value="http://www.springframework.org/security/tags">
+   <prefix>sec</prefix>
+  </uri>
+  <uri value="http://java.sun.com/jsp/jstl/core">
+   <prefix>c</prefix>
+  </uri>
+ </uris>
+</kb-project>

@@ -1,0 +1,12 @@
+package marquise.teste;
+
+public class Teste3 {
+
+	public static void main(String[] args) {
+	
+		static int i = 3;
+		
+		
+	}
+
+}

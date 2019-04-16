@@ -1,0 +1,28 @@
+package br.com.marquise.model;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
+public class BaseEntity extends AbstractEntity {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ENTITY_SEQUENCE")
+	@Column(name = "COD", unique = true, nullable = false)
+	private Long cod;
+	
+	@Override
+	public Long getCod() {		
+		return cod;
+	}
+
+	@Override
+	public void setCod(Long cod) {
+		this.cod = cod;
+		
+	}
+
+}

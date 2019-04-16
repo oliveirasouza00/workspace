@@ -1,0 +1,406 @@
+angular.module('app').controller('RelatorioOuvidoriaCscController', function($scope, $window, $http, $ocLazyLoad, OuvidoriaCSC, tipoCsc, GenericService, UsuarioService, Utils)
+{
+	
+   FormPlugins.init();
+   AppMarquise.init();
+   
+   $scope.itemsByPage=20;
+      
+   $scope.listaRegistrosCSC = [];
+   $scope.displayRegistrosCSC = {};
+   
+   $scope.listAreaResponsavel =[];
+   $scope.displayAreaResponsavel = {};
+   
+   $scope.validaalert = false;
+   $scope.mensagem = "";
+   
+   $scope.registroCsc = OuvidoriaCSC.get();
+   $scope.area={};
+   $scope.area.responsavel = UsuarioService.get();
+   $scope.tipos = tipoCsc.get();
+   
+   $scope.init = function() {
+	   $scope.registroCsc = new Object();
+	   $scope.registroCsc.date = GenericService.formataDateToJavaDateInitDay(new Date());
+	   $scope.registroCsc.dateFim =  GenericService.formatDateToJavaPlusDay($scope.registroCsc.date, 1);
+	   $scope.registrosPorLogin();
+	   
+   }
+  
+   
+   $scope.buscarRegistrosPorRegistro = function() {
+	   
+	   $scope.registroCsc.date = GenericService.formataDateToJavaDateInitDay($scope.registroCsc.date);
+	   $scope.registroCsc.dateFim =  GenericService.formatDateToJavaPlusDay($scope.registroCsc.dateFim, 1);
+	   
+	   
+	   $http({
+		   method: 'POST',
+		   url: 'ouvidoria/buscarRegistrosPorRegistro',
+		   data: $scope.registroCsc
+		 }).then(function successCallback(response) {
+            
+			 $scope.listaRegistrosCSC = response.data.list;
+			 $scope.displayRegistrosCSC = $scope.listaRegistrosCSC;
+			
+		   
+		 }, function errorCallback(response) {			   
+			   self.AppMarquise.addMensagem(response.data.erroObject);
+		});
+   }
+   
+   $scope.listAllMensages = function(reg) {
+	   
+	   $http({
+		   method: 'POST',
+		   url: 'ouvidoria/listAllMensages',
+		   data: reg
+		 }).then(function successCallback(response) {
+            
+			 $scope.mensagens = response.data.list;
+			 
+		 }, function errorCallback(response) {			   
+			   self.AppMarquise.addMensagem(response.data.erroObject);
+		});
+	   
+   }
+   
+   $scope.registrosPorLogin = function() {
+	   $http({
+		   method: 'POST',
+		   url: 'ouvidoria/registrosPorLogin'
+		 }).then(function successCallback(response) {
+            
+			 $scope.listaRegistrosCSC = response.data.list;
+			 $scope.displayRegistrosCSC = $scope.listaRegistrosCSC;
+			
+		   
+		 }, function errorCallback(response) {			   
+			   self.AppMarquise.addMensagem(response.data.erroObject);
+		});
+   }
+   
+   $scope.areas = function() {
+	   $http({
+		   method: 'GET',
+		   url: 'ouvidoria/areas'
+		 }).then(function successCallback(response) {
+            
+			 $scope.listAreaResponsavel = response.data.list;
+			 $scope.displayAreaResponsavel = $scope.listAreaResponsavel;
+			
+		   
+		 }, function errorCallback(response) {			   
+			   self.AppMarquise.addMensagem(response.data.erroObject);
+		});
+   }
+   
+   buscaReponsaveis = function() {
+	   $http({
+		   method: 'GET',
+		   url: 'ouvidoria/buscarResponsaveisCsc'
+		 }).then(function successCallback(response) {
+         
+			 $scope.responsaveis = response.data.list;
+			 
+		 }, function errorCallback(response) {			   
+			   self.AppMarquise.addMensagem(response.data.erroObject);
+		});
+   }
+   
+   $scope.aplicarsalvar = function() {
+	   
+	   if($scope.area.responsavel != undefined) {
+		   var user = $scope.area.responsavel;
+		   $scope.area = GenericService.get();
+		   $scope.area.responsavel = user;
+	   }
+
+	   
+	   $http({
+		   method: 'POST',
+		   url: 'ouvidoria/aplicarResponsavelArea',
+		   data: $scope.area
+		 }).then(function successCallback(response) {
+            
+			 $scope.listaRegistrosCSC = response.data.list;
+			 $scope.displayRegistrosCSC = $scope.listaRegistrosCSC;
+			 $scope.areas();
+		   
+		 }, function errorCallback(response) {			   
+			   self.AppMarquise.addMensagem(response.data.erroObject);
+		});
+   }
+   
+   $scope.removerUserArea = function() {
+	   $http({
+		   method: 'POST',
+		   url: 'ouvidoria/removerArea',
+		   data: $scope.area
+		 }).then(function successCallback(response) {
+			 self.AppMarquise.addNotification('Removido',response.data.erroObject.mensagem);
+			 $scope.areas();
+			 
+		 }, function errorCallback(response) {			   
+			   self.AppMarquise.addMensagem(response.data.erroObject);
+		});
+   }
+   
+   $scope.notificarEmailResponsavel = function() {
+	   $http({
+		   method: 'POST',
+		   url: 'ouvidoria/notificarEmailResponsavel',
+		   data: $scope.registroCsc
+		 }).then(function successCallback(response) {
+			 self.AppMarquise.addNotification('Sucesso',response.data.erroObject.mensagem);
+			 $scope.init();
+			 
+		 }, function errorCallback(response) {			   
+			   self.AppMarquise.addMensagem(response.data.erroObject);
+		});
+   }
+   
+   $scope.alterarRegistro = function() {
+	   
+	   $http({
+		   method: 'POST',
+		   url: 'ouvidoria/alterarRegistro',
+		   data: $scope.registroCsc
+		 }).then(function successCallback(response) {
+			 self.AppMarquise.addNotification('Sucesso',response.data.erroObject.mensagem);
+			 var reg = $scope.registroCsc;
+			 $scope.registrosPorLogin();			
+			 $scope.listAllMensages(reg);
+			 $scope.registroCsc.respostaResponsavelTxt ="";
+			 $scope.registroCsc.msgAdicional = "";
+			 
+		 }, function errorCallback(response) {			   
+			   self.AppMarquise.addMensagem(response.data.erroObject);
+		});
+   }
+   
+   $scope.encerrarRegistro = function() {
+	  
+	   $http({
+		   method: 'POST',
+		   url: 'ouvidoria/encerrarRegistro',
+		   data: $scope.registroCsc
+		 }).then(function successCallback(response) {
+			 self.AppMarquise.addNotification('Sucesso',response.data.erroObject.mensagem);
+			 $scope.init();
+			 
+		 }, function errorCallback(response) {			   
+			   self.AppMarquise.addMensagem(response.data.erroObject);
+		});
+   }
+   
+   
+   $scope.gerarPDF = function() {
+	   
+	   $scope.content = [];
+	   
+
+	   var column = [];
+	   var value = [];
+	   
+	   column.push({text: "PROTOCOLO", style: 'tableHeader'});
+	   column.push({text: "DATA", style: 'tableHeader'});
+	   column.push({text: "AREA", style: 'tableHeader'});
+	   column.push({text: "RESPONSAVEL", style: 'tableHeader'});
+	   	   
+	   for(var i=0; i < $scope.listaRegistrosCSC.length; i++){
+		   var userResp;
+		   if($scope.listaRegistrosCSC[i].areaCSC.responsavel == undefined) {
+			   userResp = "";
+		   } else {
+			   userResp = $scope.listaRegistrosCSC[i].areaCSC.responsavel.nomeUsu;
+		   }
+		   
+		   value[i] = [""+ $scope.listaRegistrosCSC[i].protocolo +"", ""+ $scope.listaRegistrosCSC[i].date +"", ""+ $scope.listaRegistrosCSC[i].areaCSC.nome +"", ""+ userResp +""];
+		   
+	   }  
+	   
+	   $scope.docDefinition = {
+				content: [
+				          { text: 'Ouvidoria do CSC - '+ new Date(), margin: [0, 20, 0, 8] },
+				          {
+				            table: {
+				              // headers are automatically repeated if the table spans over multiple pages
+				              // you can declare how many rows should be treated as headers
+				              headerRows: 1,			             				          	 
+				              body: [
+				                   column				                
+				              ].concat(value)
+				            }
+				          }
+				        ]
+           };
+		
+	     pdfMake.createPdf($scope.docDefinition).download();
+   }
+   
+   
+   $scope.exportData = function () {
+       var blob = new Blob([document.getElementById('exportable').innerHTML], {
+           type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+       });
+       saveAs(blob, "Report.xls");
+   };
+   
+   $scope.showAddUser = function(area) {
+	   $scope.nomeArea = area.nome;
+	   GenericService.set(area);
+	   $("#dialogResponsavel").modal("show");
+	   buscaReponsaveis();
+   }
+   
+   $scope.showRemUser = function(area) {
+	   $scope.area = area;
+	   $("#dialogResponsavelRemov").modal("show");
+   }
+   
+   $scope.showCadArea = function() {
+	   $scope.area = null;
+	   $("#dialogCadArea").modal("show");
+   }
+   
+   $scope.showDetail = function(registro) {
+	   OuvidoriaCSC.set(registro);
+	   $scope.registroCsc = OuvidoriaCSC.get();
+	   $scope.listAllMensages($scope.registroCsc);
+	   $scope.registroCsc.msgAdicional = "";
+	   $("#dialogDetail").modal("show");
+   }
+   
+   $scope.showEncerrar = function(registro) {
+	   OuvidoriaCSC.set(registro);
+	   $scope.registroCsc = OuvidoriaCSC.get();
+	   $("#dialogEncerrar").modal("show");
+   }
+   
+   $scope.showEmailSend = function(registro) {
+	   $scope.registroCsc = registro;
+	   $scope.registroCsc.msgAdicional = null; 
+	   $("#showEmailSend").modal("show");
+   }
+   
+   $scope.excluirRegistro = function(registro) {
+	   OuvidoriaCSC.set(registro);
+	   $("#excluirRegistro").modal("show");
+   }
+   
+   $scope.showBuscaModal = function() {
+	   $scope.registroCsc.date = null;
+	   $scope.registroCsc.dateFim = null;
+	   buscaReponsaveis();
+	   $scope.areas();
+	   $("#buscarModal").modal("show");
+   }
+   
+   $scope.showEditResponsavel = function(registro) {
+	   OuvidoriaCSC.set(registro);
+	   $scope.areas();
+	   $("#dialogResponsavelArea").modal("show");
+   }
+   
+   $scope.aplicarAreaRegistro = function() {
+	   $scope.areatmp = $scope.registroCsc.areaCSC;
+	   $scope.registroCsc = OuvidoriaCSC.get();
+	   $scope.registroCsc.areaCSC = $scope.areatmp;
+	   
+	   $http({
+		   method: 'POST',
+		   url: 'ouvidoria/alterarAreaRegistro',
+		   data: $scope.registroCsc
+		 }).then(function successCallback(response) {
+			 self.AppMarquise.addNotification('Sucesso',response.data.erroObject.mensagem);
+			 $scope.init();
+			 
+		 }, function errorCallback(response) {			   
+			   self.AppMarquise.addMensagem(response.data.erroObject);
+		});
+   }
+   
+   $scope.aplicarExcluirRegistro = function(registro) {
+	   $scope.registroCsc = OuvidoriaCSC.get();
+	   
+	   $http({
+		   method: 'POST',
+		   url: 'ouvidoria/excluirRegistro',
+		   data: $scope.registroCsc
+		 }).then(function successCallback(response) {
+			 self.AppMarquise.addNotification('Sucesso',response.data.erroObject.mensagem);
+			 $scope.init();
+			 
+		 }, function errorCallback(response) {			   
+			   self.AppMarquise.addMensagem(response.data.erroObject);
+		});
+   }
+   
+   $scope.buscarOuvidoriaRelatoio = function(registro) {
+	   $scope.registroCsc = OuvidoriaCSC.get();
+	   
+	   $http({
+		   method: 'POST',
+		   url: 'ouvidoria/buscarRegistro',
+		   data: $scope.registroCsc
+		 }).then(function successCallback(response) {
+			 self.AppMarquise.addNotification('Sucesso',response.data.erroObject.mensagem);
+			 $scope.init();
+			 
+		 }, function errorCallback(response) {			   
+			   self.AppMarquise.addMensagem(response.data.erroObject);
+		});
+   }
+   
+   limpar = function() {
+	   $scope.clientecsc = {};
+	   $scope.validaalert = false;
+	   $scope.mensagem = "";
+   }
+   
+ $scope.buscarPorProtocolo = function(registroCsc) {
+	   $scope.registroCsc
+	   
+	   $http({
+		   method: 'POST',
+		   url: 'ouvidoria/buscarPorProtocolo',
+		   data : $scope.registroCsc
+		 }).then(function successCallback(response) {             
+			 
+			 $scope.registroAberto = response.data.registroCSC;
+			 if($scope.registroAberto.protocolo == undefined) {
+				 self.AppMarquise.addNotification("Não existe", "Este protocolo não consta na base de dados.");
+			 } else {
+				 opendialod();
+			 }
+			 
+			 
+			// limpar();
+		   }, function errorCallback(response) {			   
+			   self.AppMarquise.addMensagem(response.data.erroObject);
+		});
+   }
+ 
+ 
+  $scope.baixarAnexo = function(registroCsc){
+	  var fileName = registroCsc.attachment.fileName;
+	  var file = registroCsc.attachment.image;
+	  //var byteArray = new Uint8Array(file);
+	  //var byteCharacters = atob(file);
+	  //var byteArray = Base64Binary.decodeArrayBuffer(file);
+	  
+	  //pdfMake.createPdf(docDefinition).download();
+	  
+	  Utils.downloadPDF(fileName, file);
+	  //Utils.uploadFileToUrl(fileName, file);
+  }
+  
+   
+   opendialod = function() {
+	 $("#dialogProtocolo").modal("show");	
+   }
+   
+      
+});

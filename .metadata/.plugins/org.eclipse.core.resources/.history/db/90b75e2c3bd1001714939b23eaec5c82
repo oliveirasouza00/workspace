@@ -1,0 +1,1023 @@
+angular.module('app').controller('AtendimentoController', function($scope, $localStorage, $http, $ocLazyLoad, $location, UsuarioService, 
+																	SacService, OccurrenceService, tipoHist, proceedlist, statuslist, serviceratelist, Utils, PainelCDCMongo)
+{
+	   
+	   
+	   $scope.required = true;
+	   //Inicializa plugins de css e js na tela
+	   FormPlugins.init();	   
+
+	   $('[data-toggle="tooltip"]').tooltip();
+	 
+	   
+	   $scope.disabled = undefined;
+	   $scope.searchEnabled = undefined;
+	   $scope.addHistoryDisabled = false;
+
+	   $scope.enable = function() {
+	     $scope.disabled = false;
+	   };
+
+	   $scope.disable = function() {
+	     $scope.disabled = true;
+	   };
+
+	   $scope.enableSearch = function() {
+	     $scope.searchEnabled = true;
+	   };
+
+	   $scope.disableSearch = function() {
+	     $scope.searchEnabled = false;
+	   };
+	   
+	   $scope.itemsByPage=20;
+	      
+	   $scope.listaSacService = [];
+	   $scope.displaySacServiceList = {};
+	   
+	   $scope.init = function () {
+		   
+	   };  
+	   
+	   
+	   
+	   $scope.atendimento = SacService.get();
+	   $scope.occurrence = OccurrenceService.get();
+	   $scope.usuario =  $localStorage.user;
+	   //$scope.serviceHist = {};
+	   
+	   $scope.orgInfo = {
+			   cod : null,
+			   organizationId: $scope.usuario.organization.cod,
+			   fantasyName: "",
+			   serviceTime: null,
+			   createdBy: null
+	   };
+	   
+	   $http({
+			method: 'POST',
+			url: 'reportconfig/getorginfo',
+			data : $scope.orgInfo
+		}).then(function successCallback(response) {
+			$scope.orgInfo = response.data.organizationInfo;
+			loadServiceTime($scope.orgInfo);
+		}, function errorCallback(response) {
+			self.AppMarquise.addNotification("Ops!", response.data.erroObject.mensagem);
+		});
+	   
+	   
+	   $scope.statuslist = statuslist.get();
+	   $scope.proceedlist = proceedlist.get();
+	   $scope.tipoHistList = tipoHist.get();
+	   $scope.serviceratelist = serviceratelist.get();
+	   $scope.fiscalTipoHist = "V";
+	   $scope.analistaTipoHist = "A";
+	   
+	   $scope.editarSac = false;
+	   
+	   $scope.editSac = function(){
+		   $scope.editarSac = !$scope.editarSac;
+	   };
+	   
+	   $scope.buscaAtendimentoDia = function(){
+		   $http.post("atendimento/listsactoday", {organizationId: $scope.usuario.organization.cod})
+		   	.then(function (response) {
+		   		$scope.listaSacService = $scope.calculateSla(response.data.list);
+		   		$scope.listaSacService.sort(dynamicSort("cod"));
+		   		//$scope.listaSacService = response.data.list;		   
+		   		$scope.displaySacServiceList = response.data.list;
+		   		$scope.displaySacServiceList.sort(dynamicSort("cod"));
+		   	});
+	   };
+	   
+	   $scope.buscaAtendimentoDia();
+
+	   $scope.btnBusca = { disabled: false,
+		   					label: "Buscar"
+	   					 };
+	   
+	   $scope.arrayXLS = [];
+	   //$scope.arrayHeader = [];
+	   
+	   $scope.atendimentoBusca = null;
+	   $scope.buscarAtendimento = function(atendimentoBusca) {
+		   //var date = moment((new Date()).getTime()).format('YYYY-MM-DDTHH:MM:SS-0300');
+		   $scope.atendimentoBusca = atendimentoBusca;
+		   if($scope.atendimentoBusca !== null) {
+			   if($scope.atendimentoBusca.inicioCreate !== undefined) {
+				   $scope.atendimentoBusca.inicioCreate = moment((new Date($scope.atendimentoBusca.inicioCreate)).getTime()).format('YYYY-MM-DDTHH:MM:SS-0300');
+				   $scope.atendimentoBusca.creationDate = moment((new Date($scope.atendimentoBusca.creationDate)).getTime()).format('YYYY-MM-DDTHH:MM:SS-0300'); 
+			   }
+		   } else {
+			   self.AppMarquise.addNotification("Ops!", "Selecione uma algo para a consulta");
+			   return;
+		   }
+		   
+		   $scope.atendimentoBusca.organizationId = $scope.usuario.organization.cod;
+		   
+		   
+		   $scope.btnBusca.disabled = true;
+		   $scope.btnBusca.label = "Buscando...";
+		   $http({
+			   method: 'POST',
+			   url: 'atendimento/buscaatendimento',
+			   data : $scope.atendimentoBusca
+			 }).then(function successCallback(response) {             
+				 
+				 $("#modal-atendimento").modal("hide");
+				 $scope.listaSacService = $scope.calculateSla(response.data.list);
+				 $scope.listaSacService.sort(dynamicSort("cod"));
+				 //$scope.listaSacService = response.data.list;		   
+				 $scope.displaySacServiceList = response.data.list;
+				 $scope.displaySacServiceList.sort(dynamicSort("cod"));
+				 $scope.btnBusca.disabled = false;
+				 $scope.btnBusca.label = "Buscar";
+				 $scope.arrayXLS = $scope.mountCSV($scope.displaySacServiceList);
+				 
+			   }, function errorCallback(response) {			   
+				   self.AppMarquise.addMensagem(response.data.erroObject.mensagem);
+				   $scope.btnBusca.disabled = false;
+				   $scope.btnBusca.label = "Buscar";
+			});
+	   };
+	   
+	   var mystyle = {
+			      headers:true, 
+			      column: {style:{Font:{Bold:"1"}}},
+			      rows: {1:{style:{Font:{Color:"#FF0077"}}}}
+			    };
+	   
+	   var dataAtual = new Date();
+	   filename = "Atendimentos_SAC_"+dataAtual.getDate()+dataAtual.getMonth()+dataAtual.getFullYear()+dataAtual.getHours()+dataAtual.getMinutes()+dataAtual.getSeconds()+".xls";
+	   
+	   $scope.exportData = function () {
+	        alasql('SELECT '+getHeaders()+' INTO XLSX("'+filename+'",?) FROM ?',[mystyle, $scope.arrayXLS]);
+	    };
+	   
+	   $scope.teste = function(){
+		   $scope.getArray;
+		   $scope.arrayHeader;
+	   };
+	   
+	   $scope.limparBusca = function(){
+		   $scope.atendimentoBusca = null;
+	   };
+	   
+	   $scope.showBuscaModal = function() {	
+		   //clearServicer();
+		   $scope.atendimento = new SacService.get();
+		   $("#modal-atendimento").modal("show");		   
+	   };
+	   
+	   $http.get("sacservice/listoccurrences")
+	   	.then(function (response) {
+	   		$scope.occurrenceList = response.data.list;
+	   	});
+	   
+	   $http({
+		   method: 'POST',
+		   url: 'sacservice/listcollecttypes',
+		   data : $scope.usuario
+		 }).then(function successCallback(response) {
+			 $scope.collectTypeList = response.data.list;
+		   
+		 }, function errorCallback(response) {			   
+			 self.AppMarquise.addNotification("Ops!", response.data.erroObject.mensagem);
+		 });
+	   
+	   $http({
+		   method: 'POST',
+		   url: 'sacservice/listregionals',
+		   data : $scope.usuario
+		 }).then(function successCallback(response) {
+			 $scope.regionalList = response.data.list;
+		   
+		 }, function errorCallback(response) {	
+			 self.AppMarquise.addNotification("Ops!", response.data.erroObject.mensagem);
+	   });
+	   
+	   $http({
+		   method: 'POST',
+		   url: 'sacservice/listzgls',
+		   data : $scope.usuario
+		 }).then(function successCallback(response) {
+			 $scope.zglList = response.data.list;
+		   
+		 }, function errorCallback(response) {			   
+			 self.AppMarquise.addNotification("Ops!", response.data.erroObject.mensagem);
+		});
+	   
+	   $http({
+		   method: 'POST',
+		   url: 'sacservice/listquarters',
+		   data : $scope.usuario
+		 }).then(function successCallback(response) {
+			 $scope.quarterList = response.data.list;
+		   
+		 }, function errorCallback(response) {			   
+			 self.AppMarquise.addNotification("Ops!", response.data.erroObject.mensagem);
+		 });
+	   
+	   $http({
+		   method: 'POST',
+		   url: 'sacservice/listcircuits',
+		   data : $scope.usuario
+		 }).then(function successCallback(response) {
+			 $scope.circuitList = response.data.list;
+		   
+		 }, function errorCallback(response) {			   
+			 self.AppMarquise.addNotification("Ops!", response.data.erroObject.mensagem);
+		 });
+	   /*
+	   $http.get("occurrence/collecttypelist")
+	   .then(function (response) {
+		   $scope.collectTypeList = response.data.list;
+	   });*/
+	   
+	   
+	   $http({
+		   method: 'POST',
+		   url: 'sacservice/listinspectors',
+		   data : $scope.usuario
+		 }).then(function successCallback(response) {
+			 $scope.fiscallist = response.data.list;
+		   
+		 }, function errorCallback(response) {			   
+			 self.AppMarquise.addNotification("Ops!", response.data.erroObject.mensagem);
+		});
+	   /*$http.get("atendimento/fiscallist")
+	   .then(function (response) {
+		   $scope.fiscallist = response.data.list;
+	   });*/
+	   
+	   /*$http.get("atendimento/statuslist")
+	   .then(function (response) {
+		   $scope.statuslist = response.data.list;
+	   });*/
+	   
+	   $http.get("atendimento/servicetypelist")
+	   .then(function (response) {
+		   $scope.serviceTypeList = response.data.list;
+	   });
+	   
+	   $http.get("atendimento/sourcelist")
+	   .then(function (response) {
+		   $scope.sourceList = response.data.list;
+	   });
+	   
+	   $http.get("atendimento/severitylist")
+	   .then(function (response) {
+		   $scope.severitylist = response.data.list;
+	   });
+	   
+	   $scope.showDetail = function(atendimento) {
+		   $scope.atendimento = atendimento;
+		   $scope.atendimento.serviceHists.sort(dynamicSort("cod"));
+		   if($scope.atendimento.customer != null){
+			   $scope.atendimento.address1 = $scope.atendimento.customer.address1;
+			   $scope.atendimento.address2 = $scope.atendimento.customer.address2;
+			   $scope.atendimento.address3 = $scope.atendimento.customer.address3;
+			   $scope.atendimento.address4 = $scope.atendimento.customer.address4;
+		   }
+			   
+		   $scope.listaSacServiceHist = atendimento.serviceHists;
+		   //listSerHistByServ(atendimento);
+		   $scope.showClient = true;
+		   $scope.editarSac = false;
+		   $scope.frequency = $scope.getFrequency(atendimento.circuit);
+		   $("#modal-show-atendimento").modal("show");	
+		   
+	   };
+	   
+	   $scope.showDetailCircuit = function(atendimento) {
+		   $scope.atendimento = atendimento;
+		   $("#modal-show-circuito").modal("show");	
+		   
+	   };
+	   
+	   $scope.showImages = function(atendimento) {
+		   $scope.atendimento = atendimento;
+		   $scope.getAttachments(atendimento);
+		   $("#modal-show-imagens").modal("show");	
+		   
+	   };
+	   
+	   listSerHistByServ = function(atendimento) {
+		   
+		   if($scope.atendimento !== undefined) {
+			   if($scope.atendimento.creationDate !== undefined) {
+				   $scope.atendimento.creationDate = formataDataToDate($scope.atendimento.creationDate);
+			   }
+			}
+		   
+		   $http({
+			   method: 'POST',
+			   url: 'atendimento/listservhistbyserv',
+			   data : $scope.atendimento
+			 }).then(function successCallback(response) {             
+	   
+				 $scope.listaSacServiceHist = response.data.list;
+				 
+				 
+			   }, function errorCallback(response) {			   
+				   self.AppMarquise.addMensagem(response.data.erroObject.mensagem);
+			});
+	   };
+	   
+	   limpar = function() {
+		   //$scope.usuario = {};
+	   };   	   
+	   
+	   $scope.editar = function(serviceHist) {		   		   		   
+		   $scope.showClient = false;
+		   $scope.btnHist = "Salvar Alterar";
+		   $scope.atendimento.serviceHist = serviceHist;
+		   //$scope.serviceHist.historyDate = new Date();
+		   
+		   
+	   };
+	   
+      $scope.deletar = function(serviceHist) {		   
+		  
+    	  serviceHist.historyDate = formataDataToDate(serviceHist.historyDate);
+    	  
+		   $http({
+			   method: 'POST',
+			   url: 'atendimento/delete',
+			   data : serviceHist
+			 }).then(function successCallback(response) {             
+				 self.AppMarquise.addNotification("Item Deletado", response.data.erroObject.mensagem);
+			   }, function errorCallback(response) {			   
+				 self.AppMarquise.addNotification("Erro ", response.data.erroObject.mensagem);
+			});
+		   
+	 };
+	   
+	 //remove to the real data holder
+	 $scope.removeItem = function removeItem(row) {
+	    var index = $scope.listaSacServiceHist.indexOf(row);
+	    if (index !== -1) {
+	        $scope.listaSacServiceHist.splice(index, 1);
+	        $scope.deletar(row);
+	    }
+	 };
+	 
+	 
+	 $scope.deletarImagem = function(attachment) {		      	  
+		   $http({
+			   method: 'POST',
+			   url: 'reportconfig/delete',
+			   data : attachment
+			 }).then(function successCallback(response) {             
+				 self.AppMarquise.addNotification(response.statusText, "Imagem Deletada");
+			   }, function errorCallback(response) {			   
+				 self.AppMarquise.addNotification("Erro ", response.data.erroObject.mensagem);
+			});
+		   
+	 };
+	   
+	 //remove to the real data holder
+	 $scope.removeImagem = function removeItem(row) {
+	    var index = $scope.imageList.indexOf(row);
+	    if (index !== -1) {
+	        $scope.imageList.splice(index, 1);
+	        $scope.deletarImagem(row);
+	    }
+	 };
+	 
+	 
+	 $scope.salvarHistType = function(atendimento, type) {
+		 if(atendimento.creationDate == null && atendimento.cod != null)
+			 self.AppMarquise.addNotification("Erro ao salvar historico:", "A data esta vazia mas o codigo do atendimento existe.");
+		 else{
+			 atendimento.serviceHist.type = type;
+			 $scope.salvarHist(atendimento);
+		 }
+	 };
+	 
+	 $scope.salvarHist = function salvarHist(atendimento) {
+		 if(atendimento.serviceHist.cod == null && $scope.existHistType($scope.atendimento.serviceHists, atendimento.serviceHist.type)){
+			 self.AppMarquise.addNotification("Ops.", "Ja existe um historico do tipo selecionado. Voce deve editar o existente");
+			 return null;
+		 }
+		 
+		 var serviceHist = {cod: null, creationDate: null, createdBy: null, description: null, type: null};
+		 serviceHist = atendimento.serviceHist;
+		 
+		 if(atendimento.serviceHist.type == 'A')
+			 atendimento.status = 'I';
+		 
+		 //if(atendimento.serviceHist.description != null && atendimento.serviceHist.type == null)
+		 //serviceHist.type = $scope.fiscalTipoHist;
+		 
+		 if(serviceHist == null || serviceHist.description == "") {
+			 self.AppMarquise.addNotification("Campo Obrigatório", "Não pode salvar com campos vazios.");
+			 return null;
+		 }
+		 
+		 if(serviceHist.type == null){
+			 self.AppMarquise.addNotification("Erro", "Nao foi possivel salvar o tipo do historico");
+			 return null;
+		 }
+		 
+		 if(serviceHist == null){
+			 serviceHist.historyDate = formataDataToDate(serviceHist.historyDate);		 
+			 
+		 }
+		 
+		 serviceHist.sacService = atendimento;
+		 serviceHist.sacService.serviceHist = null;
+		 serviceHist.sacService.serviceHists = null;
+		 
+		 /*if(serviceHist.sacService != null)
+			 serviceHist.sacService.creationDate = formataDataToDate(serviceHist.sacService.creationDate);
+		 if(serviceHist.sacService != null)
+			 serviceHist.sacService.inicioCreate = formataDataToDate(serviceHist.sacService.inicioCreate);
+		 */
+		 if(serviceHist.createdBy == null)
+			 serviceHist.createdBy = $scope.usuario.nomeUsu;
+		 
+		 
+		 serviceHist.sacService.creationDate = atendimento.creationDate;
+		 if(atendimento.creationDate == null && atendimento.cod != null){
+			 self.AppMarquise.addNotification("Erro ao salvar historico:", "A data esta vazia mas o codigo do atendimento existe.");
+			 return null;
+		 }
+		 $scope.showClient = true;
+		 $scope.addHistoryDisabled = true;
+		 $http({
+			   method: 'POST',
+			   url: 'atendimento/salvarHist',
+			   data : serviceHist
+			 }).then(function successCallback(response) {
+				 $scope.listaSacServiceHist.push(serviceHist);
+				 self.AppMarquise.addNotification("Salvo ", "Salvo com sucesso");
+				 $scope.addHistoryDisabled = false;
+				 $scope.reloadAtendimento(atendimento);
+			   }, function errorCallback(response) {			   
+				 self.AppMarquise.addNotification("Erro ", response.data.erroObject.mensagem);
+				 $scope.addHistoryDisabled = false;
+			});
+	 };
+	 
+	 $scope.reloadAtendimento = function(atendimento){
+		atendimento.cod = $scope.atendimento.cod;
+		$http({
+			   method: 'POST',
+			   url: 'atendimento/carregaatendimento',
+			   data : atendimento
+			 }).then(function successCallback(response) {             
+				 
+				 $scope.atendimento = response.data.sacService;
+				 $scope.atendimento.serviceHists.sort(dynamicSort("cod"));
+				 $scope.listaSacServiceHist = $scope.atendimento.serviceHists;
+				 $scope.listaSacServiceHist.sort(dynamicSort("cod"));
+			   }, function errorCallback(response) {			   
+				   self.AppMarquise.addMensagem(response.data.erroObject.mensagem);
+				   $scope.btnBusca.disabled = false;
+				   $scope.btnBusca.label = "Buscar";
+			});
+	 };
+	 
+	 $scope.salvarSac = function (sacService) {
+		 
+		 if(sacService == null) {
+			 self.AppMarquise.addNotification("Campo Obrigatório", "Não pode salvar com campos vazios.");
+			 return null;
+		 }
+		 
+		 if(sacService.creationDate == null && sacService.cod != null){
+			 self.AppMarquise.addNotification("Erro ao salvar historico:", "A data esta vazia mas o codigo do atendimento existe.");
+			 return null;
+		 }
+		 
+		 sacService.proceed = $scope.atendimento.proceed;
+		 sacService.status = $scope.atendimento.status;
+
+		 $http({
+			   method: 'POST',
+			   url: 'atendimento/salvarSac',
+			   data : sacService
+			 }).then(function successCallback(response) {
+				 //$scope.listaSacServiceHist.push(serviceHist);
+				 self.AppMarquise.addNotification("Salvo ", "Salvo com sucesso");
+				 if($scope.atendimentoBusca == null) $scope.buscaAtendimentoDia();
+				 else $scope.buscarAtendimento($scope.atendimentoBusca);
+				 $("#modal-show-atendimento").modal("toggle");	
+			   }, function errorCallback(response) {			   
+				 self.AppMarquise.addNotification("Erro ", response.data.erroObject.mensagem);
+			});
+	 };
+	 
+	 $scope.fecharDetalhes = function(){
+		 $("#modal-show-atendimento").modal("toggle");
+		 if($scope.atendimentoBusca == null) $scope.buscaAtendimentoDia();
+		 else $scope.buscarAtendimento($scope.atendimentoBusca);
+	 };
+	 
+	 $scope.cadastrarHist = function(sacService) {
+		 SacService.set(sacService);
+		 $scope.btnHist = "Salvar Novo";
+		 $scope.showClient = false;
+		 //$scope.serviceHist = null;
+		
+	 };
+	 
+	 $scope.cancelHist = function() {
+		 $scope.showClient = true;
+	 };
+	 
+	 
+	 formataDataToDate = function(date) {
+		 if(date != null || date != undefined) {
+			 moment((new Date(date)).getTime()).format('YYYY-MM-DDTHH:MM:SS-0300'); 
+		 } else {
+			 return null;
+		 } 
+	 };
+	 
+	 formataDateToData = function(date) {
+		 if(date != null || date != undefined) {
+			 moment((new Date(date)).getTime()).format('DD/MM/YYYY HH:MI'); 
+		 } else {
+			 return null;
+		 } 
+	 };
+	 
+	 $scope.showit = function() {
+		 $('[data-toggle="tooltip"]').tooltip();
+	 };
+	 
+	 clearServicer = function() {
+		 $scope.atendimento = null;
+		 $scope.occurrence = null;
+		 $scope.serviceHist = null;
+	 };
+	 
+	 /* @param dateInit : moment -> data Inicial
+	  * @param dateFinish : moment -> data Final
+	  * @return sundays : num -> Numero de domingos entre as datas
+	  */
+	 function numSundays(dateInit, dateFinish) {
+		var sundays = 0;
+		while (dateInit.startOf('day') < dateFinish.startOf('day')) {
+			dateInit = dateInit.add(1, 'days');
+			if (dateInit.isoWeekday() == 7) {
+				sundays += 1;
+			}
+		}
+		return sundays;
+	 }
+	 
+	 $scope.calculateSla = function($list){
+		 for(var i=0; i<$list.length; i++){
+			   if($list[i].serviceHists.length == 0)
+				   continue;
+			   $list[i].serviceHists.sort(dynamicSort("cod"));
+			   // So existe o tipo verificação criado(Ainda não foi atendido)
+			   var histVer = getHist("V", $list[i].serviceHists);
+			   var sundays = 0;
+			   var now = moment(new Date());
+			   if(histVer != null)
+				   sundays = (numSundays(moment($list[i].serviceHists[0].creationDate), moment(histVer.creationDate) ))*24;
+			   else
+				   sundays = (numSundays(moment($list[i].serviceHists[0].creationDate), now ))*24;
+			   if($list[i].serviceHists.length == 1){
+				  
+				   var timeDur = moment.duration(moment().diff($list[i].serviceHists[0].creationDate));
+				   var hours = parseInt(timeDur.asHours());
+				   var minutes = parseInt(timeDur.asMinutes())-hours*60;
+				   hours = hours - sundays;
+				   $list[i].sla = (hours < 10 ? '0'+hours : hours)+":"+(minutes < 10 ? '0'+minutes : minutes);
+				   $list[i].creationDate = $list[i].serviceHists[0].creationDate;
+			   }
+			   if($list[i].serviceHists.length > 1){
+				   var timeR = null;
+				   var timeV = null;
+				   reclamacaoEncontrada = false;
+				   if(getHist("R", $list[i].serviceHists) == null){
+					   $list[i].sla = "00:00";
+					   continue;
+				   }
+				   timeR = getHist("R", $list[i].serviceHists).creationDate;
+				   if(getHist("V", $list[i].serviceHists) == null){
+					   $list[i].sla = "00:00";
+					   continue;
+				   }
+				   timeV = getHist("V", $list[i].serviceHists).creationDate;
+				   if(timeR != null && timeV != null){
+					   var timeDur = moment.duration(moment(timeV).diff(moment(timeR)));
+					   var hours = parseInt(timeDur.asHours());
+					   var minutes = parseInt(timeDur.asMinutes())-hours*60;
+					   hours = hours - sundays;
+					   $list[i].sla = (hours < 10 ? '0'+hours : hours)+":"+(minutes < 10 ? '0'+minutes : minutes);
+				   }
+				   
+				   //$scope.listaSacService[i].sla = "24:00";
+			   }
+			   
+		   }
+		 return $list;
+	 };
+	 
+	 $scope.getValueFromList = function($value, $list){
+		 
+		var result = [];
+		 
+
+		if($list != null){
+			for(var i = 0 ; i < $list.length ; i++){
+				if($value == $list[i].key){
+						 result.push($list[i]);               
+				}
+			}	
+		 }
+		 
+		 return result;
+	};
+	
+	$scope.isReclamacao = function($cod){
+		return $cod=="R";
+	};
+	
+	$scope.getCircuitDisplay = function($circuit){
+		return $circuit.circuitCod + " | " + $circuit.name;
+	};
+	
+	$scope.setConcluir = function(atendimento){
+		atendimento.status = 'I';
+	};
+	
+	$scope.getFrequency = function($circuit){
+		if($circuit == null)
+			return "";
+		dias = "";
+		periodo = "";
+		if($circuit.sunD == "Y" || $circuit.sunN == "Y" || $circuit.sunI == "Y")
+			dias += "Dom ";
+		if($circuit.monD == "Y" || $circuit.monN == "Y" || $circuit.monI == "Y")
+			dias += "Seg ";
+		if($circuit.tueD == "Y" || $circuit.tueN == "Y" || $circuit.tueI == "Y")
+			dias += "Ter ";
+		if($circuit.wedD == "Y" || $circuit.wedN == "Y" || $circuit.wedI == "Y")
+			dias += "Qua ";
+		if($circuit.thuD == "Y" || $circuit.thuN == "Y" || $circuit.thuI == "Y")
+			dias += "Qui ";
+		if($circuit.friD == "Y" || $circuit.friN == "Y" || $circuit.friI == "Y")
+			dias += "Sex ";
+		if($circuit.satD == "Y" || $circuit.satN == "Y" || $circuit.satI == "Y")
+			dias += "Sab ";
+		
+		if($circuit.sunD == "Y" || $circuit.monD == "Y" || $circuit.tueD == "Y" || $circuit.wedD == "Y"
+				|| $circuit.thuD == "Y" || $circuit.friD == "Y" || $circuit.satD == "Y")
+			periodo += "DIA ";
+		
+		if($circuit.sunN == "Y" || $circuit.monN == "Y" || $circuit.tueN == "Y" || $circuit.wedN == "Y"
+				|| $circuit.thuN == "Y" || $circuit.friN == "Y" || $circuit.satN == "Y")
+			periodo += "NOITE ";
+		
+		if($circuit.sunI == "Y" || $circuit.monI == "Y" || $circuit.tueI == "Y" || $circuit.wedI == "Y"
+				|| $circuit.thuI == "Y" || $circuit.friI == "Y" || $circuit.satI == "Y")
+			periodo += "INTERMEDIÁRIO ";
+		
+		
+		return dias + " - " + periodo;
+	};
+	
+	$scope.circuitSelected = function($circuit){
+		if($circuit != null){
+			if($circuit.quarters.length >= 1)
+				$scope.atendimento.quarter = $circuit.quarters[0];	
+			$scope.atendimento.zgl = $circuit.zgl;
+			$scope.atendimento.regional = $circuit.regional;
+			$scope.atendimento.inspector = $circuit.inspector;	
+			
+		}
+	};
+	
+	$scope.getHeader = {service_id: "No. Atendimento",
+				external_reference: "No. Prefeitura",
+				creationDate: "Data",
+				sla: "Tempo do Atendimento",
+				service_type: "Tipo",
+				source_type: "Origem",
+				collect_type: "Tipo de Coleta",
+				status: "Status",
+				prc: "Procede",
+				occurrence: "Ocorrencia",
+				reclamacao: "Reclamacao",
+				verificacao: "Verificacao",
+				acao_imediata: "Acao imediata",
+				conclusao: "Conclusao",
+				customer_name: "Cliente",
+				customer_phone: "Telefone",
+				customer_phone_sec: "Telefone Secundario",
+				customer_email: "E-Mail",
+				customer_address: "Endereco",
+				customer_cep: "CEP",
+				regional: "Regional",
+				quarter: "Bairro",
+				zgl: "Zona",
+				circuit: "Circuito",
+				inspector: "Fiscal",
+				driver: "Motorista",
+				serial_number: "Bem"
+	};
+	
+	function getHeaders(){
+		return ' service_id AS [No. Atendimento], ' +
+				' external_reference AS [No. Prefeitura], ' +
+				' creationDate AS [Data], ' +
+				' sla AS [Tempo do Atendimento], ' +
+				' service_type AS [Tipo], ' +
+				' source_type AS [Origem], ' +
+				' collect_type AS [Tipo de Coleta], ' +
+				' status AS [Status], ' +
+				' prc AS [Procede], ' +
+				' occurrence AS [Ocorrencia], ' +
+				' reclamacao AS [Reclamacao], ' +
+				' verificacao AS [Verificacao], ' +
+				' acao_imediata AS [Acao imediata], ' +
+				' conclusao AS [Conclusao], ' +
+				' customer_name AS [Cliente], ' +
+				' customer_phone AS [Telefone], ' +
+				' customer_phone_sec AS [Telefone Secundario], ' +
+				' customer_email AS [E-Mail], ' +
+				' customer_address AS [Endereco], ' +
+				' customer_cep AS [CEP], ' +
+				' regional AS [Regional], ' +
+				' quarter AS [Bairro], ' +
+				' zgl AS [Zona], ' +
+				' circuit AS [Circuito], ' +
+				' inspector AS [Fiscal], ' +
+				' driver AS [Motorista], ' +
+				' serial_number AS [Bem]';
+	};
+	                            			
+	/*function getHist(type, list){
+		if(list == null)
+			return null;
+		for(var i=0; i<list.length; i++){
+			if(list[i].type == type)
+				if(type == "C") {
+					return list[i].description 
+				} else {
+					return list[i];	
+				}
+				
+		}
+		return null;
+	};*/
+	
+	$scope.getHeaderXLS = {service_id: 'No. Atendimento'};
+	
+	$scope.filename = "Atendimentos_SAC.csv";
+	$scope.mountCSV = function(atendimentoList){
+		dataAtual = new Date();
+		$scope.filename = "Atendimentos_SAC_"+dataAtual.getDate()+dataAtual.getMonth()+dataAtual.getFullYear()+dataAtual.getHours()+dataAtual.getMinutes()+dataAtual.getSeconds()+".csv";
+		var arrayReturn = [];
+		for(var i=0; i<atendimentoList.length; i++){
+			descricao = "";
+			for(var j=0; j<atendimentoList[i].serviceHists.length; j++){
+				if(atendimentoList[i].serviceHists[j].type == 'R')
+					descricao = atendimentoList[i].serviceHists[j].description;
+			}
+			var proceed="";
+			if(atendimentoList[i].proceed == "S")
+				proceed = "SIM";
+			if(atendimentoList[i].proceed == "N")
+				proceed = "NAO";
+			
+			
+			arrayReturn.push({	service_id: atendimentoList[i].cod,
+									external_reference: atendimentoList[i].externalReference,
+									creationDate: (atendimentoList[i].creationDate == null ? "" : moment((new Date(atendimentoList[i].creationDate)).getTime()).format('DD/MM/YYYY HH:mm:SS') ),
+									sla: (atendimentoList[i].sla == null ? "" : atendimentoList[i].sla),
+									service_type: (atendimentoList[i].serviceType == null ? "" : $scope.getValueFromList(atendimentoList[i].serviceType,$scope.serviceTypeList).length == 0 ? "" : acentuar($scope.getValueFromList(atendimentoList[i].serviceType,$scope.serviceTypeList)[0].name)),
+									source_type: (atendimentoList[i].source == null ? "" : acentuar($scope.getValueFromList(atendimentoList[i].source, $scope.sourceList)[0].name)),
+									collect_type: (atendimentoList[i].collectType == null ? "" : acentuar(atendimentoList[i].collectType.name)),
+									status: ((atendimentoList[i].status == null || atendimentoList[i].status == 'T') ? "N/I" : $scope.getValueFromList(atendimentoList[i].status, $scope.statuslist)[0].name),
+									prc: proceed,
+									occurrence: (atendimentoList[i].occurrence == null ? "" : acentuar(atendimentoList[i].occurrence.description)),
+						   			reclamacao: (getHist("R",atendimentoList[i].serviceHists) == null ? "" :  acentuar(getHist("R",atendimentoList[i].serviceHists).description) ),
+						   			verificacao: (getHist("V",atendimentoList[i].serviceHists) == null ? "" :  acentuar(getHist("V",atendimentoList[i].serviceHists).description) ),
+						   			acao_imediata: (getHist("A",atendimentoList[i].serviceHists) == null ? "" :  acentuar(getHist("A",atendimentoList[i].serviceHists).description) ),
+						   			conclusao: (getHist("C",atendimentoList[i].serviceHists) == null ? "" :  acentuar(getHist("C",atendimentoList[i].serviceHists).description) ),
+						   			customer_name: (atendimentoList[i].customer == null || atendimentoList[i].customer == null ? "" : atendimentoList[i].customer.customerName),
+						   			customer_phone: (atendimentoList[i].customer == null || atendimentoList[i].customer.primaryPhoneAreaCode == null ? "" : atendimentoList[i].customer.primaryPhoneAreaCode)+
+						   							(atendimentoList[i].customer == null || atendimentoList[i].customer.primaryPhoneNumber == null ? "" : atendimentoList[i].customer.primaryPhoneNumber),
+						   			customer_phone_sec: (atendimentoList[i].customer == null || atendimentoList[i].customer.primaryCelAreaCode == null ? "" : atendimentoList[i].customer.primaryCelAreaCode)+
+						   							(atendimentoList[i].customer == null || atendimentoList[i].customer.primaryCelNumber == null ? "" : atendimentoList[i].customer.primaryCelNumber),
+						   			customer_email: (atendimentoList[i].customer == null || atendimentoList[i].customer.emailAddress == null ? "" : atendimentoList[i].customer.emailAddress),
+						   			customer_address: 	acentuar((atendimentoList[i].customer == null || atendimentoList[i].customer.address1 == null ? "" : atendimentoList[i].customer.address1)+' '+
+						   								(atendimentoList[i].customer == null || atendimentoList[i].customer.address2 == null ? "" : atendimentoList[i].customer.address2)+' '+
+						   								(atendimentoList[i].customer == null || atendimentoList[i].customer.address3 == null ? "" : atendimentoList[i].customer.address3)+' '+
+						   								(atendimentoList[i].customer == null || atendimentoList[i].customer.address4 == null ? "" : atendimentoList[i].customer.address4)),
+						   			customer_cep: (atendimentoList[i].customer == null || atendimentoList[i].customer.postalCode == null ? "" : atendimentoList[i].customer.postalCode),
+						   			regional: (atendimentoList[i].regional == null ? "" : atendimentoList[i].regional.name),
+									quarter: (atendimentoList[i].quarter == null ? "" : atendimentoList[i].quarter.name),
+									zgl: (atendimentoList[i].zgl == null ? "" : atendimentoList[i].zgl.name),
+									circuit: (atendimentoList[i].circuit == null ? "" : atendimentoList[i].circuit.circuitCod+' | '+atendimentoList[i].circuit.name),
+									inspector: (atendimentoList[i].inspector == null ? "" : atendimentoList[i].inspector.lastName),
+									driver: (atendimentoList[i].circuit == null ? "" : atendimentoList[i].circuit.driver == null ? "" : atendimentoList[i].circuit.driver.lastName),
+									serial_number: (atendimentoList[i].circuit == null ? "" : atendimentoList[i].circuit.serialNumber == null ? "" : atendimentoList[i].circuit.serialNumber)
+						   			});
+		}
+		return arrayReturn;
+	};
+	
+	function dynamicSort(property) {
+	    var sortOrder = 1;
+	    if(property[0] === "-") {
+	        sortOrder = -1;
+	        property = property.substr(1);
+	    }
+	    return function (a,b) {
+	        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+	        return result * sortOrder;
+	    };
+	};
+	
+	$scope.getNameFromList = function(key, list){
+		var name = null;
+		for(var i=0; i<list.length; i++){
+			if(key == list[i].key)
+				name = list[i].name;
+		}
+		return name;
+	};
+	
+	$scope.existHistType = function(histList, type){
+		for(var i=0; i<histList.length; i++){
+			if(histList[i].type == type)
+				return true;
+		}
+		return false;
+	};
+	
+	
+	$scope.btnLoadDisabled = false;
+	$scope.btnSaveVisible = false;
+	   
+	$scope.attach = {
+			   cod: null,
+			   organizationId: $scope.usuario.organization.cod,
+			   serviceId: null,
+			   fileName: null,
+			   typeCode: "OCORR",
+			   image: null,
+			   createdBy: null
+	};
+	$scope.imageUpload = null;
+	$scope.imageList = null;
+	$scope.getAttachments = function(atendimento){
+		$scope.attach.organizationId = $scope.usuario.organization.cod;
+		$scope.attach.serviceId = atendimento.cod;
+		$http({
+			method: 'POST',
+			url: 'reportconfig/getattachment',
+			data : $scope.attach
+			}).then(function successCallback(response) {
+				$scope.imageList = response.data.list;
+			}, function errorCallback(response) {
+				self.AppMarquise.addNotification("Ops!", response.data.erroObject.mensagem);
+		});
+	};
+	
+	   
+	   
+	$scope.imageBase4 = null;
+	$scope.imageFile = null;
+	   
+	   /*for (var i=0, file; file=o.files[i]; i++) {
+		   self.AppMarquise.addNotification("Ops!", file.name);
+	   }*/
+	$scope.imageStrings = [];
+	$scope.processFiles = function(files){
+		$scope.fileData = new Blob([files[0]]);
+		   angular.forEach(files, function(flowFile, i){
+			   var fileReader = new FileReader();
+			   fileReader.onload = function (event) {
+				   var uri = event.target.result;
+				   $scope.imageStrings[i] = uri; 
+				   $scope.imageBase4 = uri;
+				   $scope.imageUpload = uri;
+				   $scope.btnLoadDisabled = true;
+				   $scope.btnSaveVisible = true;
+			   };
+			   fileReader.readAsDataURL(flowFile.file);
+			   $scope.imageFile = flowFile;
+		   });
+	};
+	
+	$scope.maxImageSize = 307200;
+	$scope.errors = [];
+	$scope.validate = function (file) {
+		if (file.size > $scope.maxImageSize) {
+			self.AppMarquise.addNotification("Erro:", "O tamanho da imagem nao deve superar "+($scope.maxImageSize/1024)+"Kb");
+			return false;
+		}
+		return true;
+	};
+		
+	$scope.salvarImagem = function(){
+		$scope.attach.image = $scope.imageBase4;
+		$scope.attach.fileName = $scope.imageFile.name;
+		if($scope.attach.createdBy == null)
+			$scope.attach.createdBy = $scope.usuario.nomeUsu;
+		$scope.attach.lastUpdatedBy = $scope.usuario.nomeUsu;
+		$scope.attach.organizationId = $scope.usuario.organization.cod;
+		$scope.attach.serviceId = $scope.atendimento.cod;
+		$http({
+			method: 'POST',
+			url: 'reportconfig/salvar',
+			data : $scope.attach
+		}).then(function successCallback(response) {
+			self.AppMarquise.addNotification("Sucesso", "A nova imagem foi carregada");
+			$scope.btnLoadDisabled = false;
+			$scope.btnSaveVisible = false;
+			$scope.imageUpload = null;
+			$scope.imageStrings = [];
+			$scope.getAttachments($scope.atendimento);
+		}, function errorCallback(response) {
+			self.AppMarquise.addNotification("Ops!", response.data.erroObject.mensagem);
+		});
+	};
+	
+	
+	function acentuar(mensagem)
+    {
+        //Paulo Tolentino
+        //Usar dessa forma: alert(acentuarAlerts('teste de acentuação, essência, carência, âê.'));
+        //
+		
+		if(mensagem == null)
+			return "";
+
+        mensagem = mensagem.replace('á', '\u00e1');
+        mensagem = mensagem.replace('à', '\u00e0');
+        mensagem = mensagem.replace('â', '\u00e2');
+        mensagem = mensagem.replace('ã', '\u00e3');
+        mensagem = mensagem.replace('ä', '\u00e4');
+        mensagem = mensagem.replace('Á', '\u00c1');
+        mensagem = mensagem.replace('À', '\u00c0');
+        mensagem = mensagem.replace('Â', '\u00c2');
+        mensagem = mensagem.replace('Ã', '\u00c3');
+        mensagem = mensagem.replace('Ä', '\u00c4');
+        mensagem = mensagem.replace('é', '\u00e9');
+        mensagem = mensagem.replace('è', '\u00e8');
+        mensagem = mensagem.replace('ê', '\u00ea');
+        mensagem = mensagem.replace('ê', '\u00ea');
+        mensagem = mensagem.replace('É', '\u00c9');
+        mensagem = mensagem.replace('È', '\u00c8');
+        mensagem = mensagem.replace('Ê', '\u00ca');
+        mensagem = mensagem.replace('Ë', '\u00cb');
+        mensagem = mensagem.replace('í', '\u00ed');
+        mensagem = mensagem.replace('ì', '\u00ec');
+        mensagem = mensagem.replace('î', '\u00ee');
+        mensagem = mensagem.replace('ï', '\u00ef');
+        mensagem = mensagem.replace('Í', '\u00cd');
+        mensagem = mensagem.replace('Ì', '\u00cc');
+        mensagem = mensagem.replace('Î', '\u00ce');
+        mensagem = mensagem.replace('Ï', '\u00cf');
+        mensagem = mensagem.replace('ó', '\u00f3');
+        mensagem = mensagem.replace('ò', '\u00f2');
+        mensagem = mensagem.replace('ô', '\u00f4');
+        mensagem = mensagem.replace('õ', '\u00f5');
+        mensagem = mensagem.replace('ö', '\u00f6');
+        mensagem = mensagem.replace('Ó', '\u00d3');
+        mensagem = mensagem.replace('Ò', '\u00d2');
+        mensagem = mensagem.replace('Ô', '\u00d4');
+        mensagem = mensagem.replace('Õ', '\u00d5');
+        mensagem = mensagem.replace('Ö', '\u00d6');
+        mensagem = mensagem.replace('ú', '\u00fa');
+        mensagem = mensagem.replace('ù', '\u00f9');
+        mensagem = mensagem.replace('û', '\u00fb');
+        mensagem = mensagem.replace('ü', '\u00fc');
+        mensagem = mensagem.replace('Ú', '\u00da');
+        mensagem = mensagem.replace('Ù', '\u00d9');
+        mensagem = mensagem.replace('Û', '\u00db');
+        mensagem = mensagem.replace('ç', '\u00e7');
+        mensagem = mensagem.replace('Ç', '\u00c7');
+        mensagem = mensagem.replace('ñ', '\u00f1');
+        mensagem = mensagem.replace('Ñ', '\u00d1');
+        mensagem = mensagem.replace('&', '\u0026');
+        mensagem = mensagem.replace('\'', '\u0027');
+
+        return mensagem;
+    }
+})
+
+.directive('datetime', function (dateFilter) {
+    return {
+        require:'ngModel',
+        link:function (scope, elm, attrs, ctrl) {
+
+            var dateFormat = attrs['datetime'] || 'dd/MM/yyyy HH:mm';
+           
+            ctrl.$formatters.unshift(function (modelValue) {
+                return dateFilter(modelValue, dateFormat);
+            });
+        }
+    };
+});

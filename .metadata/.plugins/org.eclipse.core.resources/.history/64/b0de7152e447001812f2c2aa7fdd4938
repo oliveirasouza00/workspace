@@ -1,0 +1,15 @@
+angular.module('app').controller('LancamentoInformaconController', 
+		function($q,
+				 $scope, 
+				 $http, 
+				 $ocLazyLoad, 
+				 $localStorage, 
+				 $location, 
+				 $interval, 				
+				 GenericService				 
+				 )
+{
+	FormPlugins.init();
+	AppMarquise.init();
+
+});

@@ -1,0 +1,20 @@
+package br.com.marquise.centrofashion.model;
+
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+import br.com.marquise.model.BaseEntity;
+
+@Entity
+@Table(name = "apps.jvs_cf_cond_pagamento_v")
+@SequenceGenerator(name = "ENTITY_SEQUENCE", sequenceName = "MQS.JVS_ALL_CUSTOMERS_S",  allocationSize=1 )
+@AttributeOverride(name = "cod", column = @Column(name = "TERM_ID"))
+public class CondicaoPagamento extends BaseEntity {
+	
+	@Column(name="NAME")
+	private String name;
+	
+}

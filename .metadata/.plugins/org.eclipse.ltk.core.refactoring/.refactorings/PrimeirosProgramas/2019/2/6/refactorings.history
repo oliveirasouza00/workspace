@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename source folder &apos;PrimeirosProgramas/marquise.com.ve&apos; to &apos;marquise.com.br.teste&apos;&#x0D;&#x0A;- Original project: &apos;PrimeirosProgramas&apos;&#x0D;&#x0A;- Original element: &apos;PrimeirosProgramas/marquise.com.ve&apos;&#x0D;&#x0A;- Renamed element: &apos;marquise.com.ve&apos;" description="Rename source folder &apos;marquise.com.ve&apos;" id="org.eclipse.jdt.ui.rename.source.folder" input="/marquise.com.ve" name="marquise.com.br.teste" stamp="1549393959111" version="1.0"/>
+</session>

@@ -1,0 +1,12 @@
+package entities;
+
+public class Acount {
+		
+		number : int;
+		holder : String;
+		balance : Double;
+
+		
+		
+
+}

@@ -1,0 +1,318 @@
+package br.com.marquise.csc.controller;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.inject.Inject;
+
+import br.com.caelum.vraptor.Consumes;
+import br.com.caelum.vraptor.Controller;
+import br.com.caelum.vraptor.Get;
+import br.com.caelum.vraptor.Path;
+import br.com.caelum.vraptor.Post;
+import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.serialization.gson.WithoutRoot;
+import br.com.caelum.vraptor.view.Results;
+import br.com.marquise.controller.BaseController;
+import br.com.marquise.csc.model.AreaCSC;
+import br.com.marquise.csc.model.EStatusAtendimento;
+import br.com.marquise.csc.model.MensagemRegistro;
+import br.com.marquise.csc.model.RegistroCSC;
+import br.com.marquise.csc.model.StatusAtendimento;
+import br.com.marquise.csc.service.AreaCSCService;
+import br.com.marquise.csc.service.EmailCSCService;
+import br.com.marquise.csc.service.MensagemRegistroService;
+import br.com.marquise.csc.service.RegistroCSCService;
+import br.com.marquise.model.Attachment;
+import br.com.marquise.service.AttachmentService;
+import br.com.marquise.service.EmailApi;
+import br.com.marquise.service.UsuarioService;
+import br.com.marquise.util.BusinessException;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
+@Controller
+@Path(value = "/ouvidoria")
+public class OuvidoriaCSCController extends BaseController {
+
+	private Result result;
+	
+	private RegistroCSCService cscService;
+	
+	@Inject
+	private MensagemRegistroService mensagemRegistroService;
+	
+	@Inject
+	private AreaCSCService areaService;
+	
+	@Inject
+	private AttachmentService attachmentService;
+	
+	private EmailApi emailApi;
+	
+	@Inject
+	private UsuarioService usuarioService;
+	
+	@Inject
+	private EmailCSCService emailCSCService;
+	
+	public OuvidoriaCSCController() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	@Inject
+	public OuvidoriaCSCController(Result result, RegistroCSCService cscService, AreaCSCService area, EmailApi emailApi) {
+		this.result = result;
+		this.cscService = cscService;
+		this.areaService = area;
+		this.emailApi = emailApi;
+	}
+	
+	
+	/*@Post
+	@Path(value="/salvar")
+	@Consumes(value = "application/json", options=WithoutRoot.class)
+	public void salvar(RegistroCSC csc) throws BusinessException {		
+		csc.setProtocolo(cscService.geraProtocoloCSC());
+		
+		if(csc.getStatusAtendimento() == null) {
+			csc.setStatusAtendimento(new StatusAtendimento());
+		}
+		csc.getStatusAtendimento().setCod(EStatusAtendimento.AGUARDANDO_AVALIACAO.getStatus());
+		
+		cscService.save(csc);
+		
+		if(csc.getEmail() != null) {
+			emailApi.enviarEmail(csc.getEmail(), AVISO_CSC , SEU_PROTOCOLO_CSC + csc.getProtocolo());
+		} else {
+			emailApi.enviarEmail(EmailApi.EMAIL_CSC, PROTOCOLO_CSC_ABERTO , PROTOCOLO_CSC_ABERTO + csc.getProtocolo());
+		}
+		
+		result.use(Results.http()).setStatusCode(200);
+		result.use(Results.json()).from(csc).recursive().serialize();
+	}*/
+	
+	@Post
+	@Path(value="/salvar")
+	@Consumes(value = "application/json", options=WithoutRoot.class)
+	public void salvar(JsonObject params) throws BusinessException{		
+		
+		RegistroCSC csc = new RegistroCSC();
+		AreaCSC areaC = new AreaCSC();
+		Attachment attachment = new Attachment();
+		
+		csc.setProtocolo(cscService.geraProtocoloCSC());
+				
+		String tipo = params.get("tipo").getAsString();
+		Long areaCSC = params.get("areaCSC").getAsJsonObject().get("cod").getAsLong();
+		
+		Integer identificacao = params.get("identificacao").getAsInt();			
+		if(identificacao != 0){
+			String nome = params.get("nome").getAsString();
+			String fone = params.get("fone").getAsString();
+			String email = params.get("email").getAsString();
+			
+			
+			csc.setNome(nome);
+			csc.setFone(fone);
+			csc.setEmail(email);
+		}
+		
+		String registro = params.get("registro").getAsString();
+		
+		if(csc.getStatusAtendimento() == null){
+			csc.setStatusAtendimento(new StatusAtendimento());
+		}
+		csc.getStatusAtendimento().setCod(EStatusAtendimento.AGUARDANDO_AVALIACAO.getStatus());
+		
+		csc.setDate(new Date());
+		areaC = areaService.findById(areaCSC);
+		csc.setIdentificao(identificacao);
+		csc.setTipo(tipo);		 
+		csc.setAreaCSC(areaC);		
+		csc.setRegistro(registro);
+		
+		JsonObject attach = params.get("attach").getAsJsonObject();
+		
+		String fileName = "";
+		
+		if(!params.get("attach").getAsJsonObject().get("fileName").isJsonNull()){
+			fileName = params.get("attach").getAsJsonObject().get("fileName").getAsString();
+		
+			//Integer organizationId = attach.get("organizationId").getAsInt();
+			String typeCode = params.get("attach").getAsJsonObject().get("typeCode").getAsString();
+			String image = params.get("attach").getAsJsonObject().get("image").getAsString();			
+			
+			//attachment.setOrganizationId(organizationId);
+			attachment.setFileName(fileName);
+			attachment.setTypeCode(typeCode);
+			attachment.setImage(image);
+			attachment.setCreationDate(new Date());
+			
+			attachmentService.save(attachment);
+			csc.setAttachment(attachment);
+		}
+		
+		cscService.save(csc);
+				
+		if(csc.getEmail() != null) {
+			emailApi.enviarEmail(csc.getEmail(), AVISO_CSC , SEU_PROTOCOLO_CSC + csc.getProtocolo());
+		} else {
+			emailApi.enviarEmail(EmailApi.EMAIL_CSC, PROTOCOLO_CSC_ABERTO , PROTOCOLO_CSC_ABERTO + csc.getProtocolo());
+		}
+		
+		result.use(Results.http()).setStatusCode(200);
+		result.use(Results.json()).from(csc).serialize();		
+	}
+	
+	@Get
+	@Path(value="/areas")
+	public void areas() {
+		result.use(Results.http()).setStatusCode(200);
+		result.use(Results.json()).from(areaService.findAll()).recursive().serialize();
+	}
+	
+	@Get
+	@Path(value="/areasDistintas")
+	public void areasDistintas() {
+		List<AreaCSC> areas = areaService.findAllDistinct();
+		result.use(Results.http()).setStatusCode(200);		
+		result.use(Results.json()).from(areas).recursive().serialize();
+	}
+	
+	@Post
+	@Path(value="/buscarRegistrosPorRegistro")
+	@Consumes(value = "application/json", options=WithoutRoot.class)
+	public void buscarRegistrosPorRegistro(RegistroCSC csc) {
+		result.use(Results.http()).setStatusCode(200);
+		result.use(Results.json()).from(cscService).recursive().serialize();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Post
+	@Path(value="/registrosPorLogin")
+	@Consumes(value = "application/json", options=WithoutRoot.class)
+	public void registrosPorLogin() {
+		result.use(Results.http()).setStatusCode(200);
+		result.use(Results.json()).from(cscService.registrosByUserLoginByAuth(getUseName(), getAuthsUserLogin())).recursive().serialize();
+	}
+	
+	@Get
+	@Path(value="/buscarResponsaveisCsc")
+	public void buscarResponsaveisCsc() {
+		result.use(Results.http()).setStatusCode(200);
+		result.use(Results.json()).from(usuarioService.usuariosResponsaveisSetor()).recursive().serialize();
+	}
+	
+	@Post
+	@Path(value="/aplicarResponsavelArea")
+	@Consumes(value = "application/json", options=WithoutRoot.class)
+	public void aplicarResponsavelArea(AreaCSC areaCSC) throws BusinessException {
+		areaService.save(areaCSC);
+		ADD_MENSAGEM_SUCESSO(result);
+	}
+	
+	
+	
+	@Post
+	@Path(value="/removerArea")
+	@Consumes(value = "application/json", options=WithoutRoot.class)
+	public void removerArea(AreaCSC areaCSC) throws BusinessException {
+		areaService.removeResponsavelArea(areaCSC);
+		areaCSC.setResponsavel(null);
+		areaService.delete(areaCSC);
+		ADD_MENSAGEM_DELETE(result);
+	}
+	
+	@Post
+	@Path(value="/notificarEmailResponsavel")
+	@Consumes(value = "application/json", options=WithoutRoot.class)
+	public void notificarEmailResponsavel(RegistroCSC registro) throws BusinessException {
+		
+		if(registro.getStatusAtendimento() == null) {
+			registro.setStatusAtendimento(new StatusAtendimento());
+		}
+		registro.getStatusAtendimento().setCod(EStatusAtendimento.ENCAMINHADO_AO_RESPONSAVEL.getStatus());
+		emailApi.enviarEmail(registro.getAreaCSC().getResponsavel().getEmail(), 
+				PROTOCOLO_CSC_ABERTO + registro.getProtocolo() , 
+				emailCSCService.findById(1L).getMensagem() + "\n\n\n"
+				+ "Data de Abertura: " + registro.getDate() + "\n\n"
+				+ "Protocolo de Registro: " + registro.getProtocolo() + "\n\n"
+				+ "Ã�rea ResponsÃ¡vel: " + registro.getAreaCSC().getNome() + "\n\n"
+				+ "Assunto :" + registro.getMsgAdicional());		
+		cscService.save(registro);
+		mensagemRegistroService.aplicaRegistroInMensagemAndSave(registro, getUseName());
+		
+		ADD_MENSAGEM_SUCESSO(result);
+	}
+	
+	@Post
+	@Path(value="/alterarRegistro")
+	@Consumes(value = "application/json", options=WithoutRoot.class)
+	public void alterarRegistro(RegistroCSC registro) throws BusinessException {
+		
+		registro.getStatusAtendimento().setCod(EStatusAtendimento.ATENDIDO.getStatus());
+		cscService.save(registro);
+		mensagemRegistroService.aplicaRegistroInMensagemAndSave(registro, getUseName());
+		
+		ADD_MENSAGEM_SUCESSO(result);
+	}
+	
+	@Post
+	@Path(value="/encerrarRegistro")
+	@Consumes(value = "application/json", options=WithoutRoot.class)
+	public void encerrarRegistro(RegistroCSC registro) throws BusinessException {
+		
+		registro.getStatusAtendimento().setCod(EStatusAtendimento.ENCERRADO.getStatus());
+		cscService.save(registro);
+		
+		ADD_MENSAGEM_SUCESSO(result);
+	}
+	
+	@Post
+	@Path(value="/buscarPorProtocolo")
+	@Consumes(value = "application/json", options=WithoutRoot.class)
+	public void buscarPorProtocolo(RegistroCSC csc) {
+		result.use(Results.http()).setStatusCode(200);
+		result.use(Results.json()).from(cscService.findByProtocolo(csc.getProtocolo())).recursive().serialize();
+	}
+	
+	
+	@Post
+	@Path(value="/listAllMensages")
+	@Consumes(value = "application/json", options=WithoutRoot.class)
+	public void listAllMensages(RegistroCSC reg) {
+		result.use(Results.http()).setStatusCode(200);
+		result.use(Results.json()).from(mensagemRegistroService.mensagensByRegistro(reg)).include("usuario").serialize();
+	}
+	
+	@Post
+	@Path(value="/alterarAreaRegistro")
+	@Consumes(value = "application/json", options=WithoutRoot.class)
+	public void alterarAreaRegistro(RegistroCSC registro) throws BusinessException {
+		cscService.save(registro);
+		ADD_MENSAGEM_SUCESSO(result);
+	}
+	
+	@Post
+	@Path(value="/excluirRegistro")
+	@Consumes(value = "application/json", options=WithoutRoot.class)
+	public void excluirRegistro(RegistroCSC registro) throws BusinessException {		
+		List<MensagemRegistro> ms = new ArrayList<MensagemRegistro>();
+		ms = mensagemRegistroService.mensagensByRegistro(registro);
+		if(ms != null) {
+			for(MensagemRegistro m : ms) {
+				mensagemRegistroService.delete(m);
+			}	
+		}
+		
+		cscService.delete(registro);
+		ADD_MENSAGEM_DELETE(result);
+	}
+	
+	
+	
+}

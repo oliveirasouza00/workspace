@@ -1,0 +1,32 @@
+package br.com.marquise.informacon.dao.impl;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import javax.ejb.Stateless;
+
+import org.hibernate.type.StandardBasicTypes;
+
+import br.com.marquise.dao.impl.AbstractCrudDaoImpl;
+import br.com.marquise.informacon.dao.InformaconDao;
+import br.com.marquise.informacon.model.Lancamento;
+import br.com.marquise.model.AbstractEntity;
+
+@Stateless
+public class InformaconDaoImpl<Entity extends AbstractEntity> extends AbstractCrudDaoImpl<AbstractEntity> implements InformaconDao<AbstractEntity>{
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Lancamento> lancamentosByParameters(Map<String, Object> parameters) throws SQLException {
+		List<Lancamento> lancamentos = new ArrayList<>();
+		List<Object[]> query = getSession().createSQLQuery(LANCAMENTO_INFORMACOM)
+				.setParameter("filial", parameters.get("filial") != null ? parameters.get("filial").toString() : null, StandardBasicTypes.INTEGER)
+				.setParameter("data_inicial", parameters.get("data_inicial") != null ? parameters.get("data_inicial").toString() : null, StandardBasicTypes.STRING)
+				.setParameter("data_final", parameters.get("data_final") != null ? parameters.get("data_final").toString() : null, StandardBasicTypes.STRING)
+				.list();
+		return null;
+	}
+
+}
