@@ -3,7 +3,7 @@ package aplication;
 import java.util.Locale;
 import java.util.Scanner;
 
-import banck.Account;
+import entities.Account;
 
 public class Program {
 
@@ -38,7 +38,6 @@ public class Program {
 		}
 		
 				
-		sc.close();
 		 
 		System.out.println();
 		System.out.println("Account Data: ");
@@ -64,7 +63,8 @@ public class Program {
 		
 		
 		
-		
+		sc.close();
+
 		
 	}
 

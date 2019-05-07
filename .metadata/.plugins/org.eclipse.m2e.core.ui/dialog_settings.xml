@@ -15,6 +15,7 @@
 			<item value="[artifactId]-[version]"/>
 			<item value="[groupId].[artifactId]"/>
 			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
 		</list>
 		<list key="version">
 			<item value="0.0.1-SNAPSHOT"/>
@@ -31,7 +32,7 @@
 		</list>
 	</section>
 	<section name="MavenProjectWizardArchetypePage">
-		<item value="All Catalogs" key="catalog"/>
+		<item key="catalog" value="All Catalogs"/>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
 			<item value="[artifactId]-TRUNK"/>
@@ -44,6 +45,7 @@
 	</section>
 	<section name="MavenProjectWizardLocationPage">
 		<list key="location">
+			<item value="D:\bkp Oliveira Souza\Unidade D\workspace\course"/>
 			<item value="D:\workspace\Spring"/>
 		</list>
 		<list key="projectNameTemplate">
@@ -67,6 +69,7 @@
 			<item value="[artifactId]-[version]"/>
 			<item value="[groupId].[artifactId]"/>
 			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
 		</list>
 		<list key="version">
 			<item value="0.0.1-SNAPSHOT"/>
